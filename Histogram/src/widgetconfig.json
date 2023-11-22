@@ -1,0 +1,136 @@
+﻿{
+  "widgetName": "Histogram",
+  "guid": "f38e534c-8b22-4f97-a418-065409e577c4",
+  "displayName": "Histogram",
+  "category": "Miscellaneous",
+  "description": "Histogram is a chart representation of data that buckets a range of outcomes into columns along the x-axis. The y-axis represents the number count in the data for each column and can be used to visualize data distributions.",
+  "srcFile": "src/sourcefile.js",
+  "version": "4.2.0.0",
+  "dependencies": {
+    "scripts": [
+      "src/ej2histogram.min.js",
+	  "src/widget.js"
+    ],
+    "styles": [
+      "style/material.css"
+    ]
+  },
+  "dataFields": [
+    {
+      "displayName": "Value",
+      "valueType": "both",
+      "name": "value",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+    },
+	{
+      "displayName": "Filter",
+      "valueType": "both",
+      "name": "FilterColumn",
+      "min": "1",
+      "max": "10",
+      "optional": "true"
+    }
+  ],
+  "functionalities": [
+		{
+			"header": "GridLine Settings",
+			"properties": [
+				{
+					"displayName": "Category Axis",
+					"controlType": "bool",
+					"name": "showGridLineForXaxis",
+					"defaultValue": "false"
+				},
+				{
+					"displayName": "Primary Axis",
+					"controlType": "bool",
+					"name": "showGridLineForYaxis",
+					"defaultValue": "true"
+				}
+			]
+		},
+		{
+			"header": "Basic Settings",
+			"properties": [
+				{
+					"displayName": "Enable Animation",
+					"controlType": "bool",
+					"name": "animation",
+					"defaultValue": "false"
+				},
+				{
+					"displayName": "Title",
+					"controlType": "text",
+					"name": "title",
+					"defaultValue": ""
+				},
+				{
+					"displayName": "Show Category Axis Title",
+					"controlType": "bool",
+					"name": "showxaxistitle",
+					"defaultValue": "false"
+				},
+				{
+					"displayName": "Category Axis Title",
+					"controlType": "text",
+					"name": "xAxisTitle",
+					"defaultValue": ""
+				},
+				{
+					"displayName": "Show Primary Axis Title",
+					"controlType": "bool",
+					"name": "showyaxistitle",
+					"defaultValue": "false"
+				},
+				{
+					"displayName": "Primary Axis Title",
+					"controlType": "text",
+					"name": "yAxisTitle",
+					"defaultValue": ""
+				},
+				{
+					"displayName": "Bin Interval",
+					"controlType": "number",
+					"name": "binInterval",
+					"defaultValue": "0"
+				},
+				{
+					"displayName": "Column Color",
+					"controlType": "color",
+					"name": "columnColor",
+					"defaultValue": "#00bdae"
+				},
+				{
+					"displayName": "Spline Color",
+					"controlType": "color",
+					"name": "splineColor",
+					"defaultValue": "#000000"
+				},
+				{
+					"displayName": "Data Label Color",
+					"controlType": "color",
+					"name": "datalabelcolor",
+					"defaultValue": "#676767"
+				},
+				{
+					"displayName": "Show Normal Distribution",
+					"controlType": "bool",
+					"name": "normalDistribution",
+					"defaultValue": "true"
+				}
+			]
+		}
+	],
+  "filterSettings": {
+    "masterFilter": {
+      "visible": "false",
+      "defaultValue": "true"
+    },
+    "ignoreMasterFilter": {
+      "visible": "true",
+      "defaultValue": "false"
+    }
+  }
+}

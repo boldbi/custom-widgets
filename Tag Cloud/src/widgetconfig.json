@@ -1,0 +1,138 @@
+﻿{
+  "widgetName": "TagCloud",
+  "guid": "fffbbfe5-c9fc-4951-a1d8-2a7e953781a0",
+  "displayName": "TagCloud",
+  "category": "Miscellaneous",
+  "description": "Visualize the data based on size, with hyperlink support",
+  "srcFile": "src/tagcloud.js",
+  "dependencies": {
+    "scripts": [
+      "src/ej.tagcloud.js"
+    ],
+    "styles": [
+      "style/ej.tagcloud.css"
+    ]
+  },
+  "dataFields": [
+     {
+      "displayName": "Frequency",
+      "valueType": "measure",
+      "name": "Frequency",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+     },
+     {
+      "displayName": "Text",
+      "valueType": "dimension",
+      "name": "Text",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+    }
+  ],
+  "functionalities": [
+    {
+      "header": "Title Properties",
+      "properties": [
+        {
+          "displayName": "Show Tile",
+          "controlType": "bool",
+          "name": "showTitle",
+          "defaultValue": "true"
+        },
+        {
+          "displayName": "Text",
+          "controlType": "text",
+          "name": "titleText",
+          "defaultValue": "Tag Cloud"
+        },
+        {
+          "displayName": "Background Color",
+          "controlType": "color",
+          "name": "titleBackground",
+          "defaultValue": "#D2DAE5"
+        },
+		{
+          "displayName": "Color",
+          "controlType": "color",
+          "name": "titleColor",
+          "defaultValue": "#18375E"
+        },
+        {
+          "displayName": "Size",
+          "controlType": "number",
+          "name": "titleSize",
+          "defaultValue": "12",
+          "min": "1",
+          "max": "600"
+        },
+        {
+          "displayName": "Style",
+          "controlType": "enumeration",
+          "name": "titleStyle",
+          "defaultValue": "normal",
+          "listItems": [
+            "normal",
+            "italic",
+            "oblique"
+          ]
+        }
+      ]
+    },	
+	{
+      "header": "Content Properties",
+      "properties": [
+        {
+          "displayName": "Background Color",
+          "controlType": "color",
+          "name": "textBackground",
+          "defaultValue": "#1F497D"
+        },
+		{
+          "displayName": "Color",
+          "controlType": "color",
+          "name": "textColor",
+          "defaultValue": "#B7DDE8"
+        },
+        {
+          "displayName": "Minimum Size",
+          "controlType": "number",
+          "name": "minTextSize",
+          "defaultValue": "12",
+          "min": "1",
+          "max": "600"
+        },
+	    {
+          "displayName": "Mamimum Size",
+          "controlType": "number",
+          "name": "maxTextSize",
+          "defaultValue": "20",
+          "min": "1",
+          "max": "600"
+        },
+        {
+          "displayName": "Style",
+          "controlType": "enumeration",
+          "name": "textStyle",
+          "defaultValue": "normal",
+          "listItems": [
+            "normal",
+            "italic",
+            "oblique"
+          ]
+        }
+      ]
+    }
+  ],
+  "filterSettings": {
+    "masterFilter": {
+      "visible": "true",
+      "defaultValue": "true"
+    },
+    "ignoreMasterFilter": {
+      "visible": "true",
+      "defaultValue": "false"
+    }
+  }
+}
