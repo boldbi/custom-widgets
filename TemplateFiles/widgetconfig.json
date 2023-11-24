@@ -1,0 +1,89 @@
+{
+  "widgetName": "",
+  "guid": "",
+  "displayName": "",
+  "category": "Miscellaneous",
+  "description": "Sample widget for getting start",
+  "srcFile": "src/sourcefile.js",
+  "version": "",
+  "mobileModeHeight": 0,
+  "dependencies": {
+    "scripts": [
+      "src/widget.js"
+    ],
+    "styles": [
+      "style/widget.css"
+    ]
+  },
+  "dataFields": [
+    {
+      "displayName": "First Field",
+      "valueType": "measure",
+      "name": "field1",
+      "min": "1",
+      "max": "2",
+      "optional": "false"
+    },
+    {
+      "displayName": "Second Field",
+      "valueType": "dimension",
+      "name": "field2",
+      "min": "1",
+      "max": "3",
+      "optional": "false"
+    }
+  ],
+  "functionalities": [
+    {
+      "header": "Text Properties",
+      "properties": [
+        {
+          "displayName": "Show Text",
+          "controlType": "bool",
+          "name": "showText",
+          "defaultValue": "true"
+        },
+        {
+          "displayName": "Text",
+          "controlType": "text",
+          "name": "text",
+          "defaultValue": "My first widget is created successfully"
+        },
+        {
+          "displayName": "Background Color",
+          "controlType": "color",
+          "name": "textBackground",
+          "defaultValue": "#FFE5E5"
+        },
+        {
+          "displayName": "Size",
+          "controlType": "number",
+          "name": "textSize",
+          "defaultValue": 17,
+          "min": 0,
+          "max": 600
+        },
+        {
+          "displayName": "Style",
+          "controlType": "enumeration",
+          "name": "textStyle",
+          "defaultValue": "normal",
+          "listItems": [
+            "normal",
+            "italic"
+          ]
+        }
+      ]
+    }
+  ],
+  "filterSettings": {
+    "masterFilter": {
+      "visible": "true",
+      "defaultValue": "true"
+    },
+    "ignoreMasterFilter": {
+      "visible": "true",
+      "defaultValue": "false"
+    }
+  }
+}

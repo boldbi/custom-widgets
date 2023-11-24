@@ -7,7 +7,7 @@ gulp.task('pack-all-customwidgets', (done) => {
   const currentDir = process.cwd();
 
   const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
-    .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist')
+    .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'TemplateFiles')
     .map(entry => ({
       path: path.join(currentDir, entry.name),
       name: entry.name
