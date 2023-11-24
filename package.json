@@ -1,0 +1,9 @@
+{
+	"type": "module",
+	"devDependencies": {
+		"fs": "^0.0.1-security",
+		"gulp": "^4.0.2",
+		"gulp-path": "^4.0.0",
+		"gulp-zip": "^6.0.0"
+	}
+}
