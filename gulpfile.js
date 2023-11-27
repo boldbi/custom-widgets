@@ -17,7 +17,6 @@ gulp.task('create-customwidget', (done) => {
 	const randomGuid = uuidv4();
 
 	gulp.src(`${tempFilePath}/**/*`)
-		//.pipe(gulp.dest(path.join(currentDir, widgetName,'doc')))
 		.pipe(rename((file) => {
 			file.dirname = file.dirname.replace('TemplateFiles', widgetName);
 		}))
@@ -37,6 +36,7 @@ gulp.task('create-customwidget', (done) => {
 						.pipe(jsonEditor(keyValuePairs))
 						.pipe(gulp.dest(path.join(currentDir,widgetName,'src')))
 						.on('end', function(){
+							fs.mkdirSync(path.join(currentDir, widgetName,'doc'), { recursive: true });
 							done();
 						});
 				});
