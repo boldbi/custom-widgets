@@ -17,15 +17,16 @@ gulp.task('create-customwidget', (done) => {
 	const randomGuid = uuidv4();
 
 	gulp.src(`${tempFilePath}/**/*`)
+		//.pipe(gulp.dest(path.join(currentDir, widgetName,'doc')))
 		.pipe(rename((file) => {
 			file.dirname = file.dirname.replace('TemplateFiles', widgetName);
 		}))
-		.pipe(gulp.dest(path.join(currentDir, widgetName)))
+		.pipe(gulp.dest(path.join(currentDir, widgetName,'src')))
 		.on('end', function () {
 			gulp.src(srcFilePath)
 				.pipe(replace(/guid: ([\"]).*([\"])/g, 'guid: "' + randomGuid + '"'))
 				.pipe(replace(/widgetName: ([\"]).*([\"])/g, 'widgetName: "' + widgetName + '"'))
-				.pipe(gulp.dest(path.join(currentDir, widgetName, 'src')))
+				.pipe(gulp.dest(path.join(currentDir, widgetName,'src/src')))
 				.on('end', function () {
 					const keyValuePairs = {
 						guid: randomGuid,
@@ -34,8 +35,10 @@ gulp.task('create-customwidget', (done) => {
 					};
 					gulp.src(configFilePath)
 						.pipe(jsonEditor(keyValuePairs))
-						.pipe(gulp.dest(path.join(currentDir, widgetName)))
-						.on('end', function(){done();});
+						.pipe(gulp.dest(path.join(currentDir,widgetName,'src')))
+						.on('end', function(){
+							done();
+						});
 				});
 		});
 });
