@@ -27,7 +27,7 @@
 	{
       "displayName": "Filter",
       "valueType": "both",
-      "name": "FilterColumn",
+      "name": "filters",
       "min": "1",
       "max": "10",
       "optional": "true"

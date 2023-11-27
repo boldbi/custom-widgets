@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
     guid:"ec64d658-f6c6-43e7-b11d-95eb2f4c68ab",
@@ -31,10 +31,7 @@ bbicustom.dashboard.registerWidget({
 	    widget.setAttribute("id", this.element.getAttribute("id") + "_widget");
         
 		
-		$(widget).css({
-            "height":  "300px", "width": "300px", "border": "1px solide #b3b3b3", "display":"none", "box-shadow":"0 6px 14px 3px rgb(0 0 0 / 10%)", "background-color":"white",
-			"position": "absolute", "padding-top": "10px" , "z-index": "10020"
-        }).addClass("e-dbrd-custom-dropdown-widget");
+		$(widget).css({"height": (this.model.properties.pHeight+'px'), "width": "300px", "border": "1px solide #b3b3b3", "display":"none", "box-shadow":"0 6px 14px 3px rgb(0 0 0 / 10%)", "background-color":"white","position": "absolute", "padding-top": "10px" , "z-index": "10020"}).addClass("e-dbrd-custom-dropdown-widget");
 		$("#"+this.designId).append(widget);
         
 		
@@ -61,7 +58,6 @@ bbicustom.dashboard.registerWidget({
     },
 
     renderElement: function () {
-		debugger;
 			var dialogDiv = $("#"+this.designId).find("#"+this.element.getAttribute("id") + "_widget");
         var marginTop = 0;
         if (this.isWidgetConfigured()) {
@@ -178,7 +174,6 @@ bbicustom.dashboard.registerWidget({
 	  
 	
     getDropDownObject: function (dropDownData, fieldInfo) {
-		debugger;
         return new ej2CustomMultiComboBox.dropdowns.MultiSelect({
             dataSource: dropDownData,
             fields: fieldInfo,
@@ -195,7 +190,6 @@ bbicustom.dashboard.registerWidget({
     },
 	
     onSelectData: function (args) {
-		debugger;
 		if(args.isInteracted){
 		var filteredWidgetUCName = args.element.id.split('_')[args.element.id.split('_').length-1];
 		var filteredWidgetValues = args.value;
@@ -234,7 +228,6 @@ bbicustom.dashboard.registerWidget({
 		}
     },
 	updateComboboxDataBasedOnFilteredData: function(widgetObj, filterValues, UCN){
-		debugger;
 		var filterKeys = Object.keys(filterValues);
 		var filterValues = Object.values(filterValues);
 		var newdata = this.model.dataSource;
@@ -399,11 +392,9 @@ bbicustom.dashboard.registerWidget({
     },
  
     update: function (option) {
-		debugger;
 		//this.updateHeaderElement();
 		$("#"+this.designId).find("#"+ this.element.getAttribute("id") + "_widget").hide();
         if (option.type === "resize") {
-			debugger;
         }
         else if (option.type === "refresh") {
         }
@@ -412,6 +403,7 @@ bbicustom.dashboard.registerWidget({
 			//this.widgetInstance.clearFilter();
 			this["FilteredWidgetValues"] = {};
 			var widget = document.getElementById(this.element.getAttribute("id") + "_widget");
+			$(widget).css({"height": (this.model.properties.pHeight+'px'), "width": "300px", "border": "1px solide #b3b3b3", "display":"none", "box-shadow":"0 6px 14px 3px rgb(0 0 0 / 10%)", "background-color":"white","position": "absolute", "padding-top": "10px" , "z-index": "10020"}).addClass("e-dbrd-custom-dropdown-widget");
 			//$(widget).css({
 				//"height": $(this.element).height() + "px", "width": $(this.element).width() + "px", "border": "1px solide #b3b3b3"
 			//});
@@ -446,7 +438,7 @@ bbicustom.dashboard.registerWidget({
 		this["FilteredWidgetValues"] = {};
 		
         var widget = document.getElementById(this.element.getAttribute("id") + "_widget");
-
+		$(widget).css({"height": (this.model.properties.pHeight+'px'), "width": "300px", "border": "1px solide #b3b3b3", "display":"none", "box-shadow":"0 6px 14px 3px rgb(0 0 0 / 10%)", "background-color":"white","position": "absolute", "padding-top": "10px" , "z-index": "10020"}).addClass("e-dbrd-custom-dropdown-widget");
         $(widget).children().remove();
         this.renderElement();
     }

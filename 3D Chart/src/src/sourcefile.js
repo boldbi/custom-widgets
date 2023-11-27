@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
     guid:"ebc96be7-9237-49db-8661-83748b9cd955",
@@ -31,9 +31,9 @@ bbicustom.dashboard.registerWidget({
 		this.chart = $("#"+this.element.id+"_widget").ejChart({
 			 primaryXAxis:
             {    
-				visible: this.model.properties.showyAxis,
+				visible: this.model.properties.showxAxis,
 				valueType: 'category',
-				labelIntersectAction: this.model.properties.xlabelintersect, 
+				labelIntersectAction: this.model.properties.xlabelintersect.toLowerCase(), 
 				font : {size : this.model.properties.xfontsize, color : this.model.properties.xfontcolor.slice(0,7)},       
                 title: { 
 					visible: this.model.properties.xshowTitle, 
@@ -57,8 +57,8 @@ bbicustom.dashboard.registerWidget({
             },	
             primaryYAxis:
             {   
-				visible: this.model.properties.showxAxis,
-				labelIntersectAction: this.model.properties.ylabelintersect, 
+				visible: this.model.properties.showyAxis,
+				labelIntersectAction: this.model.properties.ylabelintersect.toLowerCase(), 
 				font : {size : this.model.properties.yfontsize, color : this.model.properties.yfontcolor.slice(0,7)},        
 				title: { 
 					visible: this.model.properties.yshowTitle, 
@@ -88,10 +88,14 @@ bbicustom.dashboard.registerWidget({
 					dataLabel: 
 					{  
 						visible: this.model.properties.showdataLabels, 
-						offset: 15,
-						font: {size: this.model.properties.datalabelFontSize+'px', color : this.model.properties.datalabelColor.slice(0,7)},	
+						//offset: {x:10, y: 10},
+						font: {size: this.model.properties.datalabelFontSize+'px', color : this.model.properties.datalabelColor.slice(0,7)},
+						textPosition : this.model.properties.datalabelPosition.toLowerCase(),
+						horizontalTextAlignment : "center",
+						verticalTextAlignment : "center",
+						angle: this.model.properties.datalabelAngle.slice(0,(this.model.properties.datalabelAngle.length-1))
 					}
-                }
+                },
             },
 			series: this.getSeries(),
 			enable3D: true,	
@@ -114,24 +118,36 @@ bbicustom.dashboard.registerWidget({
 	        },
             legend: {
 				visible: this.model.properties.showLegend,
-				position: this.model.properties.legendPosition,
-				shape: this.model.properties.legendshape,
+				position: this.model.properties.legendPosition.toLowerCase(),
+				shape: this.model.properties.legendshape.toLowerCase(),
 			},
 			pointRegionClick: $.proxy(this.onClick, this),
-			toolTipInitialize: $.proxy(this.tooltipInitialize, this)
+			toolTipInitialize: $.proxy(this.tooltipInitialize, this),
+			legendItemRendering: $.proxy(this.legendItemRendering, this),
+			displayTextRendering: $.proxy(this.displayTextRendering, this)
 		});
 	},
-	
+	legendItemRendering: function(e){
+		e.data.legendItem.Text = e.data.legendItem.Text.split('~')[0];
+	},
+	displayTextRendering: function(e){
+		var index = e.data.series.name.split('~')[1];
+		if(this.isWidgetConfigured() && index != undefined){
+			var formatInfo = this.formattingInfo[this.model.boundColumns.value[Number(index)].uniqueColumnName];
+			e.data.Text = BoldBIDashboard.DashboardUtil.formattedText(Number(e.data.Text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+			
+		}
+	},
 	getSeries: function(){
 		var series =[];
 		if(this.isWidgetConfigured()){
 			for (var i = 0; i < this.model.boundColumns.value.length; i++) {
 				series.push({
 					points: this.getData(i),
-					name: this.editedColumnNames[this.model.boundColumns.value[i].uniqueColumnName], 
+					name: this.editedColumnNames[this.model.boundColumns.value[i].uniqueColumnName]+'~'+i, 
 					xName: "x", 
 					yName: "y",
-					type: this.model.properties.chartType,
+					type: this.model.properties.chartType.toLowerCase(),
 					fill: this.model.properties["chartcolor" + i].slice(0,7),
 				});
 			}
@@ -142,19 +158,19 @@ bbicustom.dashboard.registerWidget({
                     points: [{ x: "Calcium", y: 11 }, { x: "Phosphorus", y: 20 }, { x: "Sodium", y: 8}, 
 					{ x: "Magnesium", y: 19 }, { x: "Manganese", y: 8.5}, { x: "Iron", y: 6.3 }], 							 
 					name: 'Minerals Content in Apple',
-					type: this.model.properties.chartType,
+					type: this.model.properties.chartType.toLowerCase(),
                 },               
 				{
                      points: [{ x: "Calcium", y: 6 }, { x: "Phosphorus", y: 26 }, { x: "Sodium", y: 7 }, 
                               { x: "Magnesium", y: 32 }, { x: "Manganese", y: 9.6 }, { x: "Iron", y: 8.1 }], 					
 					name: 'Minerals Content in Banana',
-					type: this.model.properties.chartType,
+					type: this.model.properties.chartType.toLowerCase(),
                 },
 				{
                      points: [{ x: "Calcium", y: 7 }, { x: "Phosphorus", y: 36 }, { x: "Sodium", y: 5 }, 
                               { x: "Magnesium", y: 30 }, { x: "Manganese", y: 7.2 }, { x: "Iron", y: 9.1 }], 					
 					name: 'Minerals Content in Orange',
-					type: this.model.properties.chartType,
+					type: this.model.properties.chartType.toLowerCase(),
                 }
             ];
 		}

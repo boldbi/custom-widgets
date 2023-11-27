@@ -118,7 +118,21 @@
           "displayName": "Data Label Color",
           "controlType": "color",
           "name": "datalabelColor",
-          "defaultValue": "grey"
+          "defaultValue": "white"
+        },
+		{
+          "displayName": "Data Label",
+          "controlType": "enumeration",
+          "name": "dLabel",
+          "defaultValue": "Category",
+		  "listItems": [
+            "Category",
+            "Value",
+			"Percentange",
+			"Category and Value",
+			"Category and Percentange",
+			"Value and Percentange"
+          ]
         },
         {
           "displayName": "Show Legend",

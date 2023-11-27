@@ -1,4 +1,4 @@
-bbicustom.dashboard.registerWidget({
+﻿bbicustom.dashboard.registerWidget({
 
     guid:"fffbbfe5-c9fc-4951-a1d8-2a7e953781a0",
 
@@ -21,10 +21,12 @@ bbicustom.dashboard.registerWidget({
 	    $(this.widget).ejTagCloud({ 
 			dataSource:data, 
 			click: $.proxy(this.selectionChanged,this), 
-			showTitle: this.model.properties.showTitle, 
-			titleText: this.model.properties.titleText
+			showTitle: false, 
+			titleText: "",
+			minFontSize :(this.model.properties.minTextSize+"px"),
+			maxFontSize :(this.model.properties.maxTextSize+"px")
 		});
-		$(this.widget).css({"width":$(this.element).width(), "height": $(this.element).height(), "minFontSize" :this.model.properties.minTextSize, "maxFontSize":this.model.properties.maxTextSize });
+		$(this.widget).css({"width":$(this.element).width(), "height": $(this.element).height() });
 		this.setTagCloudProperties();
     },
 	formatData : function (dataSource) {
@@ -62,52 +64,25 @@ bbicustom.dashboard.registerWidget({
         else if (option.type == "propertyChange") {
 				switch (option.property.name)
 				{
-					case "showTitle":
-					case "titleText":
-					case "titleBackground":
-					case "titleColor":
-					case "titleSize":
-					case "titleStyle":
 					case "textBackground":
 					case "textColor":
 					case "minTextSize":
 					case "maxTextSize":
-					case "textStyle":
 						this.element.innerHTML = '';
 						this.init();
 						break;
 				}
         }
     },
-	setTitleBackground: function(value) {
-		$(this.element).find(".e-header").css("background-color", (value.length > 7) ? "#"+ value.substring(3): value);
-	},
-	setTitleColor: function(value) {
-		$(this.element).find(".e-header").css("color", (value.length > 7) ? "#"+ value.substring(3): value);
-	},
-	setTitleSize: function(value) {
-		$(this.element).find(".e-header span").css("font-size", value);
-	},
-	setTitleStyle: function(value) {
-		$(this.element).find(".e-header span").css("font-style", value);
-	},
 	setTextBackground: function(value) {
-		$(this.element).find(".e-ul").css("background-color", (value.length > 7) ? "#"+ value.substring(3): value);
+		$(this.element).find(".e-ul").css("background-color", (value.length > 7) ? value.slice(0,7): value);
 	},
 	setTextColor: function(value) {
-		$(this.element).find(".e-ul li a").css("color", (value.length > 7) ? "#"+ value.substring(3): value);
-	},
-	setTextStyle: function(value) {
-		$(this.element).find(".e-ul li a").css("font-style", value);
+		$(this.element).find(".e-ul li a").css("color", (value.length > 7) ? value.slice(0,7): value);
 	},
 	
 	setTagCloudProperties: function() {
-		this.setTitleBackground(this.model.properties.titleBackground);
-		this.setTitleColor(this.model.properties.titleColor);
-		this.setTitleSize(this.model.properties.titleSize);
-		this.setTitleStyle(this.model.properties.titleStyle);
 		this.setTextBackground(this.model.properties.textBackground);
 		this.setTextColor(this.model.properties.textColor);
-		this.setTextStyle(this.model.properties.textStyle);
 	}
 });

@@ -56,14 +56,14 @@
           "displayName": "Chart Type",
           "controlType": "enumeration",
           "name": "chartType",
-          "defaultValue": "column",
+          "defaultValue": "Column",
 		  "listItems": [
-			"column",
-			"bar",
-			"stackingColumn",
-			"stackingColumn100",
-			"stackingBar",
-			"stackingBar100"
+			"Column",
+			"Bar",
+			"StackingColumn",
+			"StackingColumn100",
+			"StackingBar",
+			"StackingBar100"
           ]
         },
 		{
@@ -128,7 +128,31 @@
           "displayName": "Data Label Color",
           "controlType": "color",
           "name": "datalabelColor",
-          "defaultValue": "grey"
+          "defaultValue": "white"
+        },
+		{
+          "displayName": "Data Label Position",
+          "controlType": "enumeration",
+          "name": "datalabelPosition",
+          "defaultValue": "Center",
+		  "listItems": [
+            "Top",
+			"Center",
+			"Bottom"
+          ]
+        },
+		{
+          "displayName": "Data Label Angle",
+          "controlType": "enumeration",
+          "name": "datalabelAngle",
+          "defaultValue": "0°",
+		  "listItems": [
+            "-90°",
+			"-45°",
+			"0°",
+			"90°",
+			"45°",
+          ]
         },
         {
           "displayName": "Show Legend",
@@ -140,24 +164,24 @@
           "displayName": "Legend Position",
           "controlType": "enumeration",
           "name": "legendPosition",
-          "defaultValue": "bottom",
+          "defaultValue": "Bottom",
 		  "listItems": [
-            "top",
-            "bottom",
-			"left",
-			"right"
+            "Top",
+            "Bottom",
+			"Left",
+			"Right"
           ]
         },
 		{
           "displayName": "Legend Shape",
           "controlType": "enumeration",
           "name": "legendshape",
-          "defaultValue":  "rectangle",
+          "defaultValue":  "Rectangle",
 		  "listItems": [
-            "rectangle",
-			"circle",
-			"triangle",
-            "seriesType",
+            "Rectangle",
+			"Circle",
+			"Triangle",
+            "SeriesType",
           ]
         },
 		{
@@ -288,15 +312,15 @@
           "displayName": "Label Intersection Action",
           "controlType": "enumeration",
           "name": "xlabelintersect",
-          "defaultValue": "hide",
+          "defaultValue": "Hide",
 		  "listItems": [
-            "hide",
-			"trim",
-			"multipleRows",
-			"rotate90",
-			"rotate45",
-			"wrap",
-			"wrapByWord"
+            "Hide",
+			"Trim",
+			"MultipleRows",
+			"Rotate90",
+			"Rotate45",
+			"Wrap",
+			"WrapByWord"
           ]
         },
 		{
@@ -402,15 +426,15 @@
           "displayName": "Label Intersection Action",
           "controlType": "enumeration",
           "name": "ylabelintersect",
-          "defaultValue": "hide",
+          "defaultValue": "Hide",
 		  "listItems": [
-            "hide",
-			"trim",
-			"multipleRows",
-			"rotate90",
-			"rotate45",
-			"wrap",
-			"wrapByWord"
+            "Hide",
+			"Trim",
+			"MultipleRows",
+			"Rotate90",
+			"Rotate45",
+			"Wrap",
+			"WrapByWord"
           ]
         },
 		{

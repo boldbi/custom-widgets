@@ -58,6 +58,16 @@
           "defaultValue": "true"
         },
 		{
+          "displayName": "Data Label Rotation",
+          "controlType": "enumeration",
+          "name": "dlRotation",
+          "defaultValue": "Normal",
+		  "listItems": [
+            "Normal",
+            "Angle"
+          ]
+        },
+		{
           "displayName": "Label Overflow Mode",
           "controlType": "enumeration",
           "name": "labelOverflowMode",

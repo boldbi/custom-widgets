@@ -1,4 +1,4 @@
-bbicustom.dashboard.registerWidget({
+﻿bbicustom.dashboard.registerWidget({
 		
 		guid : "b0d5348d-f625-4b78-8db9-c5ed9d38eb45",
 		
@@ -6,6 +6,11 @@ bbicustom.dashboard.registerWidget({
 		
 		/* init method will be called when the widget is initialized */
 		init : function () {
+			this.content = document.createElement("div");
+			this.content.setAttribute("id", this.element.getAttribute("id") + "_hovContent");
+			$(this.content).css({'height':'30px','width':'30px','display':'none'});
+			this.element.appendChild(this.content);
+			
 			this.widget = document.createElement("div");
 			this.widget.setAttribute("id", this.element.getAttribute("id") + "_widget");
 			this.element.appendChild(this.widget);
@@ -96,6 +101,8 @@ bbicustom.dashboard.registerWidget({
 						widgetObj.model.dataLabelSettings.visible = this.model.properties.showDataLabel;
 					case "labelOverflowMode":
 						widgetObj.model.dataLabelSettings.labelOverflowMode = this.model.properties.labelOverflowMode.toLowerCase();
+					case "dlRotation":
+						widgetObj.model.dataLabelSettings.labelRotationMode = this.model.properties.dlRotation.toLowerCase();
 					case "animation":
 						widgetObj.model.enableAnimation = this.model.properties.animation;
 				}
@@ -111,26 +118,29 @@ bbicustom.dashboard.registerWidget({
 			var valueMember = "Value";
 			levels = [ { groupMemberPath: "Item" }];
 			$(this.widget).ejSunburstChart({ 
-							dataSource: dataSource, 
-							valueMemberPath: valueMember, levels: levels,
-							palette: [this.model.properties.p1Color.slice(0,7), this.model.properties.p2Color.slice(0,7), this.model.properties.p3Color.slice(0,7), this.model.properties.p4Color.slice(0,7),this.model.properties.p5Color.slice(0,7), this.model.properties.p6Color.slice(0,7), this.model.properties.p7Color.slice(0,7), this.model.properties.p8Color.slice(0,7), this.model.properties.p9Color.slice(0,7), this.model.properties.p10Color.slice(0,7)],
-							tooltip: { visible: true},
-							margin: (this.marginVisibility())? { left: 10, top: 10, bottom: 10, right: 10} :{ left: 0, top: 0, bottom: 0, right: 0} ,
-							border: { width: (this.marginVisibility())? 2:0 },
-							load: $.proxy(this.sunburstChartLoad),
-							enableAnimation: false,
-							animationType: 'Rotation',
-							innerRadius: 0.2,							
-							dataLabelSettings:{visible:(this.model.properties.showDataLabel?this.dataLabelVisibility():false), labelOverflowMode:this.model.properties.labelOverflowMode.toLowerCase()},
-							size: { height: $(this.element).height(), width: $(this.element).width()},	 
-							legend: { visible:  (this.model.properties.showLegend ? this.legendVisibility():false) , position: this.model.properties.legendPosition.toLowerCase() },
-							highlightSettings: {enable: true},
-							selectionSettings: {enable: true, mode : "parent"},
-							pointRegionClick: $.proxy(this.pointRegionClick, this),
-							tooltipInitialize: $.proxy(this.tooltipInitialize, this)
-							});	
+				dataSource: dataSource, 
+				valueMemberPath: valueMember, levels: levels,
+				palette: [this.model.properties.p1Color.slice(0,7), this.model.properties.p2Color.slice(0,7), this.model.properties.p3Color.slice(0,7), this.model.properties.p4Color.slice(0,7),this.model.properties.p5Color.slice(0,7), this.model.properties.p6Color.slice(0,7), this.model.properties.p7Color.slice(0,7), this.model.properties.p8Color.slice(0,7), this.model.properties.p9Color.slice(0,7), this.model.properties.p10Color.slice(0,7)],
+				tooltip: { visible: true},
+				margin: (this.marginVisibility())? { left: 10, top: 10, bottom: 10, right: 10} :{ left: 0, top: 0, bottom: 0, right: 0} ,
+				border: { width: (this.marginVisibility())? 2:0 },
+				load: $.proxy(this.sunburstChartLoad),
+				enableAnimation: false,
+				animationType: 'Rotation',
+				innerRadius: 0.2,
+				dataLabelSettings:{
+					visible:(this.model.properties.showDataLabel?this.dataLabelVisibility():false), 
+					labelOverflowMode:this.model.properties.labelOverflowMode.toLowerCase(),
+					labelRotationMode : this.model.properties.dlPosition,
+				},
+				size: { height: $(this.element).height(), width: $(this.element).width()},	 
+				legend: { visible:  (this.model.properties.showLegend ? this.legendVisibility():false) , position: this.model.properties.legendPosition.toLowerCase() },
+				highlightSettings: {enable: true},
+				selectionSettings: {enable: true, mode : "parent"},
+				pointRegionClick: $.proxy(this.pointRegionClick, this),
+				tooltipInitialize: $.proxy(this.tooltipInitialize, this),
+			});	
 		},
-		
 		/*To render the tooltip*/
 		tooltipInitialize : function(args){
 			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
@@ -170,7 +180,6 @@ bbicustom.dashboard.registerWidget({
 		},
 		
 		pointRegionClick : function(e){
-			debugger;
 			if(this.model.initMode == "runtime"){
 			var data = [];
 			var levels = [];

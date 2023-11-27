@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
 	guid: "f38e534c-8b22-4f97-a418-065409e577c4",
@@ -44,7 +44,7 @@ bbicustom.dashboard.registerWidget({
 						this.data.push({ 'y': Number((this.model.dataSource[i][this.model.boundColumns.value[0].uniqueColumnName]).toFixed(3)) });
 					}
 				}
-				this.data.push({ 'y': 0 });
+				//this.data.push({ 'y': 0 });
 			} else {
 				for (var i = 0; i < points.length; i++) {
 					this.data.push({ 'y': points[i] });

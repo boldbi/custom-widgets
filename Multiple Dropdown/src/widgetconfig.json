@@ -40,52 +40,13 @@
           "name": "allowfilter",
           "defaultValue": "true"
         },
-        //{
-        //  "displayName": "Act As Slave Widget",
-        //  "controlType": "bool",
-        //  "name": "actasslavewidget",
-        //  "defaultValue": "true"
-        //}
-      ]
-    },
-    {
-      "header": "Text Properties",
-      "properties": [
-        {
-          "displayName": "Show Text",
-          "controlType": "checkbox",
-          "name": "showText",
-          "defaultValue": "true"
-        },
-        {
-          "displayName": "Text",
-          "controlType": "textbox",
-          "name": "text",
-          "defaultValue": "My first widget is created successfully"
-        },
-        {
-          "displayName": "Background Color",
-          "controlType": "colorpicker",
-          "name": "textBackground",
-          "defaultValue": "#FFE5E5"
-        },
-        {
-          "displayName": "Size",
-          "controlType": "updown",
-          "name": "textSize",
-          "defaultValue": "17",
-          "min": "0",
-          "max": "600"
-        },
-        {
-          "displayName": "Style",
-          "controlType": "combobox",
-          "name": "textStyle",
-          "defaultValue": "normal",
-          "listItems": [
-            "normal",
-            "italic"
-          ]
+		{
+          "displayName": "Popup Height",
+          "controlType": "number",
+          "name": "pHeight",
+          "defaultValue": 250,
+          "min": 10,
+          "max": 1000
         }
       ]
     }

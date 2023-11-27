@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
     guid:"4b77ebe6-c9bd-48be-a8ab-a525554c6b77",
@@ -75,28 +75,61 @@ bbicustom.dashboard.registerWidget({
 				position: this.model.properties.legendPosition,
 			},
 			pointRegionClick: $.proxy(this.onClick, this),
-			toolTipInitialize: $.proxy(this.tooltipInitialize, this)
+			toolTipInitialize: $.proxy(this.tooltipInitialize, this),
+			displayTextRendering: $.proxy(this.displayTextRendering, this)
 		});
 	},
-	
+	displayTextRendering: function(e){
+		if(this.isWidgetConfigured()){
+		}
+	},
 	tooltipInitialize : function(args){
-		var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
-		var isTooltioCustomizationDone = false;
-		for(var i = 0; i < this.model.dataSource.length; i++){
-			if(args.data.currentText.indexOf(this.model.dataSource[i][this.model.boundColumns.column[0].uniqueColumnName]) > -1){
-				if(this.model.boundColumns.tooltip.length > 0){
-							args.data.currentText = args.data.currentText.split(":")[0] + ": " + this.formatDataNumber(args.data.currentText.split(":")[1]);
-							for(var k = 0; k < this.model.boundColumns.tooltip.length; k++){
-								args.data.currentText += "</br>" + widgetInstance.dataColumnBindings[this.model.boundColumns.tooltip[k].uniqueColumnName] + " : " + this.formatTooltipNumber(k,this.model.dataSource[i][this.model.boundColumns.tooltip[k].uniqueColumnName]);
-							}
-						}
-						else{
-							args.data.currentText = args.data.currentText.split(":")[0]+ ": " + this.formatDataNumber(args.data.currentText.split(":")[1]);
-						}
-						isTooltioCustomizationDone = true;
-						break;
+		if(this.isWidgetConfigured()){
+			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+			var isTooltioCustomizationDone = false;
+			
+			var valUCN = this.model.boundColumns.value[0].uniqueColumnName;
+			var sum = this.model.dataSource.reduce((total, obj) => obj[valUCN] + total,0);
+			var value = args.model.series[args.data.seriesIndex].points[args.data.pointIndex].y;
+			var fVal = this.formatDataNumber(value);
+			var percent = ((value/sum)*100).toFixed(2) +'%';
+			var lText = "";
+			switch(this.model.properties.dLabel){
+				case "Category":
+					lText = percent;
+					break;
+				case "Value":
+					lText = fVal;
+					break;
+				case "Percentange":
+					lText = percent;
+					break;
+				case "Category and Value":
+					lText = fVal;
+					break;
+				case "Category and Percentange":
+					lText = percent;
+					break;
+				case "Value and Percentange":
+					lText = '(' + fVal + ')' + '(' + percent + ')';
+					break;
 			}
-			if(isTooltioCustomizationDone){break;}
+			for(var i = 0; i < this.model.dataSource.length; i++){
+				if(args.data.currentText.indexOf(this.model.dataSource[i][this.model.boundColumns.column[0].uniqueColumnName]) > -1){
+					if(this.model.boundColumns.tooltip.length > 0){
+								args.data.currentText = args.data.currentText.split(":")[0] + ": " + lText;
+								for(var k = 0; k < this.model.boundColumns.tooltip.length; k++){
+									args.data.currentText += "</br>" + widgetInstance.dataColumnBindings[this.model.boundColumns.tooltip[k].uniqueColumnName] + " : " + this.formatTooltipNumber(k,this.model.dataSource[i][this.model.boundColumns.tooltip[k].uniqueColumnName]);
+								}
+							}
+							else{
+								args.data.currentText = args.data.currentText.split(":")[0]+ ": " + lText;
+							}
+							isTooltioCustomizationDone = true;
+							break;
+				}
+				if(isTooltioCustomizationDone){break;}
+			}
 		}
 	},
 	
@@ -128,14 +161,41 @@ bbicustom.dashboard.registerWidget({
 	getData: function(){
 		var data = [];
 		if(this.isWidgetConfigured()){
-			for(var i=0; i<this.model.dataSource.length; i++){
+			for(var i = 0; i < this.model.dataSource.length; i++){
+				var valUCN = this.model.boundColumns.value[0].uniqueColumnName;
+				var sum = this.model.dataSource.reduce((total, obj) => obj[valUCN] + total,0)
 				var column = this.model.dataSource[i][this.model.boundColumns.column[0].uniqueColumnName];
-				var value = this.model.dataSource[i][this.model.boundColumns.value[0].uniqueColumnName];
+				var value = this.model.dataSource[i][valUCN];
 				var index = i >= 10 ? i % 10 : i;
+				
+				var fVal = this.formatDataNumber(value);
+				var percent = ((value/sum)*100).toFixed(2) +'%';
+				var lText =  "";
+				switch(this.model.properties.dLabel){
+					case "Category":
+						lText = column;
+						break;
+					case "Value":
+						lText = fVal;
+						break;
+					case "Percentange":
+						lText = percent;
+						break;
+					case "Category and Value":
+						lText = column + ' (' + fVal + ')';
+						break;
+					case "Category and Percentange":
+						lText = column + ' (' + percent + ')';
+						break;
+					case "Value and Percentange":
+						lText = '(' + fVal + ')' + '(' + percent + ')';
+						break;
+				}
+				
 				data.push({
 					x: column,
 					y: value,
-					text: column,
+					text: lText,
 					fill: this.model.properties["chartcolor"+index].slice(0,7),
 				});
 			}

@@ -1,9 +1,9 @@
 /* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
-    guid: "",
+    guid:"",
 
-    widgetName: "",
+    widgetName:"",
 
     init: function () {
         /* init method will be called when the widget is initialized */

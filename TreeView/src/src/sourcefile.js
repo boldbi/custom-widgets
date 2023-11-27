@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
 	guid: "a0989731-56f4-4af9-ac36-cd0b7a9edb80",

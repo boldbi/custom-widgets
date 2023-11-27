@@ -31,57 +31,9 @@
       "optional": "false"
     }
   ],
-  "functionalities": [
-    {
-      "header": "Title Properties",
-      "properties": [
-        {
-          "displayName": "Show Tile",
-          "controlType": "bool",
-          "name": "showTitle",
-          "defaultValue": "true"
-        },
-        {
-          "displayName": "Text",
-          "controlType": "text",
-          "name": "titleText",
-          "defaultValue": "Tag Cloud"
-        },
-        {
-          "displayName": "Background Color",
-          "controlType": "color",
-          "name": "titleBackground",
-          "defaultValue": "#D2DAE5"
-        },
-		{
-          "displayName": "Color",
-          "controlType": "color",
-          "name": "titleColor",
-          "defaultValue": "#18375E"
-        },
-        {
-          "displayName": "Size",
-          "controlType": "number",
-          "name": "titleSize",
-          "defaultValue": "12",
-          "min": "1",
-          "max": "600"
-        },
-        {
-          "displayName": "Style",
-          "controlType": "enumeration",
-          "name": "titleStyle",
-          "defaultValue": "normal",
-          "listItems": [
-            "normal",
-            "italic",
-            "oblique"
-          ]
-        }
-      ]
-    },	
+  "functionalities": [	
 	{
-      "header": "Content Properties",
+      "header": "Basic Properties",
       "properties": [
         {
           "displayName": "Background Color",
@@ -90,7 +42,7 @@
           "defaultValue": "#1F497D"
         },
 		{
-          "displayName": "Color",
+          "displayName": "Text Color",
           "controlType": "color",
           "name": "textColor",
           "defaultValue": "#B7DDE8"
@@ -110,17 +62,6 @@
           "defaultValue": "20",
           "min": "1",
           "max": "600"
-        },
-        {
-          "displayName": "Style",
-          "controlType": "enumeration",
-          "name": "textStyle",
-          "defaultValue": "normal",
-          "listItems": [
-            "normal",
-            "italic",
-            "oblique"
-          ]
         }
       ]
     }
