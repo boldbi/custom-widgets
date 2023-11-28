@@ -43,7 +43,7 @@ gulp pack-all-customwidgets
 gulp pack-customwidget --widgetname "sunburst"
 ```
 
-* To create a custom widget.
+* To create a new custom widget.
 
 ```csharp
 gulp create-customwidget --widgetname "testwidget"
