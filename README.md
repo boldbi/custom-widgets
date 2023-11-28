@@ -9,7 +9,7 @@ You can pack and create the custom widgets with the use of below details.
 
 ## Prepare Environment
 
-You can checkout typescript source from below repository.
+You can checkout the source from below repository.
 https://github.com/boldbi/custom-widgets
 
 once checkout the source, open command prompt and change the working directory to root directory of gulp.js file. 
