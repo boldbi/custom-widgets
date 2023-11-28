@@ -9,16 +9,16 @@ import jsonEditor from 'gulp-json-editor';
 
 gulp.task('create-customwidget', (done) => {
 	const currentDir = process.cwd();
-	const tempFilePath = path.join(currentDir, 'TemplateFiles');
-	const widgetName = (process.env.Widget_Name).trim();
+	const tempFilePath = path.join(currentDir, 'templatefiles');
+	const widgetName = process.argv[4].replace(/"/g, '').trim();
 	
-	const srcFilePath = path.join(currentDir,'TemplateFiles/src/sourcefile.js');
-	const configFilePath = path.join(currentDir,'TemplateFiles/widgetconfig.json');
+	const srcFilePath = path.join(currentDir,'templatefiles/src/sourcefile.js');
+	const configFilePath = path.join(currentDir,'templatefiles/widgetconfig.json');
 	const randomGuid = uuidv4();
 
 	gulp.src(`${tempFilePath}/**/*`)
 		.pipe(rename((file) => {
-			file.dirname = file.dirname.replace('TemplateFiles', widgetName);
+			file.dirname = file.dirname.replace('templatefiles', widgetName);
 		}))
 		.pipe(gulp.dest(path.join(currentDir, widgetName,'src')))
 		.on('end', function () {
@@ -47,7 +47,7 @@ gulp.task('pack-all-customwidgets', (done) => {
   const currentDir = process.cwd();
 
   const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
-    .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'TemplateFiles')
+    .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'templatefiles')
     .map(entry => ({
       path: path.join(currentDir, entry.name),
       name: entry.name
@@ -70,7 +70,7 @@ gulp.task('pack-all-customwidgets', (done) => {
 });
 
 gulp.task('pack-customwidget', (done) => {
-	let widgetName = (process.env.Widget_Name).trim();
+	const widgetName = process.argv[4].replace(/"/g, '').trim();
 	const subdirectories = [{path: path.join(process.cwd(),widgetName), name:widgetName}];
 
 	subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
