@@ -7,42 +7,6 @@ import replace from 'gulp-replace';
 import { v4 as uuidv4 } from 'uuid';
 import jsonEditor from 'gulp-json-editor';
 
-gulp.task('create-customwidget', (done) => {
-	const currentDir = process.cwd();
-	const tempFilePath = path.join(currentDir, 'templatefiles');
-	const widgetName = process.argv[4].replace(/"/g, '').trim();
-	
-	const srcFilePath = path.join(currentDir,'templatefiles/src/sourcefile.js');
-	const configFilePath = path.join(currentDir,'templatefiles/widgetconfig.json');
-	const randomGuid = uuidv4();
-
-	gulp.src(`${tempFilePath}/**/*`)
-		.pipe(rename((file) => {
-			file.dirname = file.dirname.replace('templatefiles', widgetName);
-		}))
-		.pipe(gulp.dest(path.join(currentDir, widgetName,'src')))
-		.on('end', function () {
-			gulp.src(srcFilePath)
-				.pipe(replace(/guid: ([\"]).*([\"])/g, 'guid: "' + randomGuid + '"'))
-				.pipe(replace(/widgetName: ([\"]).*([\"])/g, 'widgetName: "' + widgetName + '"'))
-				.pipe(gulp.dest(path.join(currentDir, widgetName,'src/src')))
-				.on('end', function () {
-					const keyValuePairs = {
-						guid: randomGuid,
-						widgetName: widgetName,
-						displayName: widgetName
-					};
-					gulp.src(configFilePath)
-						.pipe(jsonEditor(keyValuePairs))
-						.pipe(gulp.dest(path.join(currentDir,widgetName,'src')))
-						.on('end', function(){
-							fs.mkdirSync(path.join(currentDir, widgetName,'doc'), { recursive: true });
-							done();
-						});
-				});
-		});
-});
-
 gulp.task('pack-all-customwidgets', (done) => {
   const currentDir = process.cwd();
 
@@ -87,6 +51,52 @@ gulp.task('pack-customwidget', (done) => {
 		});
 	});
 	done();
+});
+gulp.task('create-customwidget', (done) => {
+	const currentDir = process.cwd();
+	const tempFilePath = path.join(currentDir, 'templatefiles');
+	const widgetName = process.argv[4].replace(/"/g, '').toLowerCase().trim();
+	
+	const srcFilePath = path.join(currentDir,'templatefiles/src/sourcefile.js');
+	const configFilePath = path.join(currentDir,'templatefiles/widgetconfig.json');
+	const randomGuid = uuidv4();
+
+	gulp.src(`${tempFilePath}/**/*`)
+		.pipe(rename((file) => {
+			file.dirname = file.dirname.replace('templatefiles', widgetName);
+		}))
+		.pipe(gulp.dest(path.join(currentDir, widgetName,'src')))
+		.on('end', function () {
+			var filePathToDel = path.join(currentDir, widgetName,'src/readme.md')
+			if (fs.existsSync(filePathToDel)) {
+				fs.unlink(filePathToDel, (err) => {
+				  if (err) {
+					console.error('Error deleting file:', err);
+				  }
+				});
+			}
+			gulp.src(srcFilePath)
+				.pipe(replace(/guid: ([\"]).*([\"])/g, 'guid: "' + randomGuid + '"'))
+				.pipe(replace(/widgetName: ([\"]).*([\"])/g, 'widgetName: "' + widgetName + '"'))
+				.pipe(gulp.dest(path.join(currentDir, widgetName,'src/src')))
+				.on('end', function () {
+					const keyValuePairs = {
+						guid: randomGuid,
+						widgetName: widgetName,
+						displayName: widgetName
+					};
+					gulp.src(configFilePath)
+						.pipe(jsonEditor(keyValuePairs))
+						.pipe(gulp.dest(path.join(currentDir,widgetName,'src')))
+						.on('end', function(){
+							gulp.src(path.join(tempFilePath,'readme.md'))
+							 .pipe(gulp.dest(path.join(currentDir,widgetName,'doc')))
+							 .on('end', function(){
+								done(); 
+							 });
+						});
+				});
+		});
 });
 
 gulp.task('run-tasks', gulp.series('pack-all-customwidgets','pack-customwidget','create-customwidget'));  
