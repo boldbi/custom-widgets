@@ -8,7 +8,7 @@ To use the sample custom widgets, clone this GitHub repository using Git.
 
 ```csharp
     git clone https://github.com/boldbi/custom-widgets
-    cd BoldBI-customwidget-Samples
+    cd custom-widgets
 ```
 
 * Install required packages by below command. 
