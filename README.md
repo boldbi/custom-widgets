@@ -1,6 +1,10 @@
 # Bold BI Custom Widget Samples 
 
-You can create a new custom widget and pack the sample custom widgets that are already available using the details provided below.
+Welcome to the Bold BI Custom Widgets Repository!
+
+## Overview
+
+This repository serves as a hub for custom widgets designed to enhance your experience with Bold BI applications. Whether you're looking to create new widgets or modify existing samples, this space is dedicated to fostering collaboration and innovation.
 
 ## Getting the custom widget samples
 
