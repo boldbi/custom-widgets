@@ -8,33 +8,32 @@ import { v4 as uuidv4 } from 'uuid';
 import jsonEditor from 'gulp-json-editor';
 
 gulp.task('pack-all-customwidgets', (done) => {
-  const currentDir = process.cwd();
+	const currentDir = process.cwd();
+	const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
+		.filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'templatefiles')
+		.map(entry => ({
+			path: path.join(currentDir, entry.name),
+			name: entry.name
+		}));
 
-  const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
-    .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'templatefiles')
-    .map(entry => ({
-      path: path.join(currentDir, entry.name),
-      name: entry.name
-    }));
+	subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
+		const directoryToCheck = path.join(subdirectoryPath, 'src');
 
-  subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
-    const directoryToCheck = path.join(subdirectoryPath, 'src');
-
-    fs.stat(directoryToCheck, (err, stat) => {
-      if (!err && stat.isDirectory()) {
-        gulp.src([`${directoryToCheck}/icon/**/*`,`${directoryToCheck}/src/**/*`,`${directoryToCheck}/style/**/*`,`${directoryToCheck}/widgetconfig.json`], { base: directoryToCheck })
-          .pipe(zip(`${subdirectoryName}.bicw`))
-          .pipe(gulp.dest('dist'));
-      } else {
-        console.log('Directory does not exist:', directoryToCheck);
-      }
-    });
-  });
-  done();
+		fs.stat(directoryToCheck, (err, stat) => {
+			if (!err && stat.isDirectory()) {
+				gulp.src([`${directoryToCheck}/icon/**/*`,`${directoryToCheck}/src/**/*`,`${directoryToCheck}/style/**/*`,`${directoryToCheck}/widgetconfig.json`], { base: directoryToCheck })
+					.pipe(zip(`${subdirectoryName}.bicw`))
+					.pipe(gulp.dest('dist'));
+			} else {
+				console.log('Directory does not exist:', directoryToCheck);
+			}
+		});
+	});
+	done();
 });
 
 gulp.task('pack-customwidget', (done) => {
-	const widgetName = process.argv[4].replace(/"/g, '').trim();
+	const widgetName = process.argv[3].match(/=(.*)/)[1].trim();
 	const subdirectories = [{path: path.join(process.cwd(),widgetName), name:widgetName}];
 
 	subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
@@ -55,7 +54,7 @@ gulp.task('pack-customwidget', (done) => {
 gulp.task('create-customwidget', (done) => {
 	const currentDir = process.cwd();
 	const tempFilePath = path.join(currentDir, 'templatefiles');
-	const widgetName = process.argv[4].replace(/"/g, '').toLowerCase().trim();
+	const widgetName = process.argv[3].match(/=(.*)/)[1].toLowerCase().trim();
 	
 	const srcFilePath = path.join(currentDir,'templatefiles/src/sourcefile.js');
 	const configFilePath = path.join(currentDir,'templatefiles/widgetconfig.json');

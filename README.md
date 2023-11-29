@@ -1,27 +1,14 @@
-# Custom Widget Component 
+# Bold BI Custom Widget Samples 
 
-You can pack and create the custom widgets with the use of below details. 
+You can create a new custom widget and pack the sample custom widgets that are already available using the details provided below.
 
-## Development Environment
+## Getting the custom widget samples
 
-* Node.js version – 16.17.0 +
-* NPM version – 8.15.0 +
-
-## Prepare Environment
-
-You can checkout the source from below repository.
-https://github.com/boldbi/custom-widgets
-
-once checkout the source, open command prompt and change the working directory to root directory of gulp.js file. 
- 
-
-* Install node.js in your machine. You can download node.js from below link.
-  https://nodejs.org/en/download/ 
-
-* Install gulp in your machine by below command. 
+To use the sample custom widgets, clone this GitHub repository using Git.
 
 ```csharp
-npm install  gulp -g
+    git clone https://github.com/boldbi/custom-widgets
+    cd BoldBI-customwidget-Samples
 ```
 
 * Install required packages by below command. 
@@ -30,21 +17,20 @@ npm install  gulp -g
 npm install
 ```
 
+* To create a new custom widget.
+
+```csharp
+npm run create -- --widgetname=testwidget
+```
 
 * To pack all custom widgets in a common location.
 
 ```csharp
-gulp pack-all-customwidgets
+npm run packall
 ```
 
 * To pack specific custom widget.
 
 ```csharp
-gulp pack-customwidget --widgetname "sunburst"
-```
-
-* To create a new custom widget.
-
-```csharp
-gulp create-customwidget --widgetname "testwidget"
+npm run pack -- --widgetname=sunburst
 ```
