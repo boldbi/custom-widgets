@@ -1,5 +1,5 @@
-﻿/* Register the widget in dashboard.*/
-bbicustom.dashboard.registerWidget({
+/* Register the widget in dashboard.*/
+ej.dashboard.registerWidget({
 
     guid:"ebc96be7-9237-49db-8661-83748b9cd955",
 
@@ -10,11 +10,11 @@ bbicustom.dashboard.registerWidget({
         this.widget.setAttribute("id", this.element.id+"_widget");
 		$(this.widget).css({"width":this.element.clientWidth,"height":this.element.clientHeight});
         this.element.appendChild(this.widget);
-		this.designId = $(this.element).closest(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
-		this.designerObj = $("#" + this.designId).data("BoldBIDashboardDesigner");
+		this.designId = $(this.element).closest(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
+		this.designerObj = $("#" + this.designId).data("ejDashboardDesigner");
 		this.formattingInfo = {};
 		this.editedColumnNames = {};
-		var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+		var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 		for(var j = 0; j<widgetInstance.dataGroupInfo.FieldContainers.length; j++){
 			if(widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0 && widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0){
 				var length = widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length;
@@ -134,7 +134,7 @@ bbicustom.dashboard.registerWidget({
 		var index = e.data.series.name.split('~')[1];
 		if(this.isWidgetConfigured() && index != undefined){
 			var formatInfo = this.formattingInfo[this.model.boundColumns.value[Number(index)].uniqueColumnName];
-			e.data.Text = BoldBIDashboard.DashboardUtil.formattedText(Number(e.data.Text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+			e.data.Text = ej.DashboardUtil.formattedText(Number(e.data.Text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 			
 		}
 	},
@@ -191,7 +191,7 @@ bbicustom.dashboard.registerWidget({
 	},
 	
 	tooltipInitialize : function(args){
-		var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+		var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 		var isTooltioCustomizationDone = false;
 		for(var i = 0; i < this.model.dataSource.length; i++){
 			if(args.data.currentText.indexOf(this.model.dataSource[i][this.model.boundColumns.column[0].uniqueColumnName]) > -1){
@@ -214,25 +214,25 @@ bbicustom.dashboard.registerWidget({
 	formatDataNumber: function (number, valIndex) {
 		var number = Number(number);
 		var formatInfo = this.formattingInfo[this.model.boundColumns.value[valIndex].uniqueColumnName];
-		number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+		number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		return number;
 	},
 	
 	formatTooltipNumber: function (number,index) {
 		var formatInfo = JSON.parse(JSON.stringify(this.formattingInfo[this.model.boundColumns.tooltip[index].uniqueColumnName]));
-		var number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+		var number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		return number;
 	},
 	
 	onClick: function(args){
 		if(this.isWidgetConfigured()){
 			var selectedFilterInfos = [];
-			var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
+			var filterinfo = new ej.dashboard.selectedColumnInfo();
 				filterinfo.condition = "include";
 				filterinfo.uniqueColumnName = this.model.boundColumns.column[0].uniqueColumnName;
 				filterinfo.values.push(args.model.series[0].points[args.data.pointData.pointIndex].x);
 			selectedFilterInfos.push(filterinfo);
-			bbicustom.dashboard.filterData(this,selectedFilterInfos);
+			ej.dashboard.filterData(this,selectedFilterInfos);
 		} 
 	},
 	

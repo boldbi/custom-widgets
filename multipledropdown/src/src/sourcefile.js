@@ -1,5 +1,5 @@
-﻿/* Register the widget in dashboard.*/
-bbicustom.dashboard.registerWidget({
+/* Register the widget in dashboard.*/
+ej.dashboard.registerWidget({
 
     guid:"ec64d658-f6c6-43e7-b11d-95eb2f4c68ab",
 
@@ -11,7 +11,7 @@ bbicustom.dashboard.registerWidget({
         this.comboBoxCount = 0;
         this.filterDataSource = [];
         this.filterUniqueName = [];
-		this.designId = $(this.element).parents(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
+		this.designId = $(this.element).parents(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
         this.defaultData = [{ "column": "Item1" }, { "column": "Item2" }, { "column": "Item3" }, { "column": "Item4" }, { "column": "Item5" }];
 		$(this.element).css("text-align","center");
         var widget = document.createElement("div");
@@ -37,24 +37,24 @@ bbicustom.dashboard.registerWidget({
 		
 		//this.element.appendChild(widget);
         this.renderElement();
-		//this.widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+		//this.widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 		this["FilteredWidgetValues"] = {};
 
     },
 	
 	updateHeaderElement: function () {
-		$($(this.element).parents(".e-customwidget-item").find(".bbi-dbrd-content-container")).addClass("custom_multicombobox_popup");
+		$($(this.element).parents(".e-reportitem").find(".e-dbrd-content-container")).addClass("custom_multicombobox_popup");
         $(this.element).css({ "background-color": this.textBackground });
-        var controlContainer = $(this.element).parents(".e-customwidget-item");
+        var controlContainer = $(this.element).parents(".e-reportitem");
         controlContainer.css({ "background-color": this.textBackground});
-        controlContainer.find(".bbi-background-waiting-popup").css({ "background-color": this.textBackground });
-        controlContainer.find(".bbi-dbrd-control-container-wrapper").css({ "padding": '0px 8px 0px 8px'});
-        controlContainer.find(".bbi-dbrd-content-container").css({ "padding": '0px'});
-        //this.title = controlContainer.find('.bbi-dbrd-control-header .bbi-title-text').html();
-        controlContainer.find(".bbi-dbrd-control-header").hide();
-        controlContainer.find(".bbi-dbrd-control-sub-header").hide();
-        controlContainer.find(".bbi-dbrd-content-container").css({ "height": "calc(100%)", "background-color": this.textBackground, "border-radius": "8px"});
-        controlContainer.find('.bbi-dbrd-control-background').css('opacity','0');
+        controlContainer.find(".e-background-waiting-popup").css({ "background-color": this.textBackground });
+        controlContainer.find(".e-dbrd-control-container-wrapper").css({ "padding": '0px 8px 0px 8px'});
+        controlContainer.find(".e-dbrd-content-container").css({ "padding": '0px'});
+        //this.title = controlContainer.find('.e-dbrd-control-header .e-title-text').html();
+        controlContainer.find(".e-dbrd-control-header").hide();
+        controlContainer.find(".e-dbrd-control-sub-header").hide();
+        controlContainer.find(".e-dbrd-content-container").css({ "height": "calc(100%)", "background-color": this.textBackground, "border-radius": "8px"});
+        controlContainer.find('.e-dbrd-control-background').css('opacity','0');
     },
 
     renderElement: function () {
@@ -102,7 +102,7 @@ bbicustom.dashboard.registerWidget({
 					"color": "grey",
 					"font-style": "italic"
                 });
-				var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+				var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 				var totalBoundedDataLength = widgetInstance.dataGroupInfo.FieldContainers[0].FieldInfos.length;
 				var columnName = "";
 				
@@ -221,7 +221,7 @@ bbicustom.dashboard.registerWidget({
 			this.updateComboboxDataBasedOnFilteredData(inputObj,this.FilteredWidgetValues,this.model.boundColumns.column[i].uniqueColumnName);
 		}
 		} else {
-			bbicustom.dashboard.filterData(this, []);
+			ej.dashboard.filterData(this, []);
 			var widgetObj =  ej2CustomMultiComboBox.base.getComponent($('#'+args.element.id)[0], "multiselect");
 			widgetObj.value = [];
 			widgetObj.selectAll(false);
@@ -314,7 +314,7 @@ bbicustom.dashboard.registerWidget({
 
     controlCreateEvent: function () {
         if (this.isWidgetConfigured()) {
-            var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+            var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
             if (this.comboBoxCount === (this.model.boundColumns.column.length-1)) {
                 if (widgetInstance.widgetJson.FilterSettings.ActAsMasterWidget && widgetInstance.widgetJson.SelectedFilterValues.length !== 0) {
                     var filterCollection = widgetInstance.widgetJson.SelectedFilterValues;
@@ -348,7 +348,7 @@ bbicustom.dashboard.registerWidget({
     },
 
     applyFilter: function () {
-        var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+        var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
         if (widgetInstance.widgetJson.FilterSettings.ActAsMasterWidget && widgetInstance.designer.model.mode !== "design") {
             var selectedFilterValue = [];
             for (var i = 0; i < this.model.boundColumns.column.length; i++) {
@@ -356,7 +356,7 @@ bbicustom.dashboard.registerWidget({
                 if (inputEle.length !== 0) {
                     var inputObject = ej2CustomMultiComboBox.base.getComponent(inputEle[0], "multiselect");
                     if (inputObject !== null && inputObject.value !== null && inputObject.value !== undefined && inputObject.value.length !== 0) {
-                        var filterColumn = new bbicustom.dashboard.selectedColumnInfo();
+                        var filterColumn = new ej.dashboard.selectedColumnInfo();
                         filterColumn.condition = "include";
                         filterColumn.uniqueColumnName = this.model.boundColumns.column[i].uniqueColumnName;
                         filterColumn.values = inputObject.value;
@@ -366,24 +366,24 @@ bbicustom.dashboard.registerWidget({
             }
             if (selectedFilterValue.length !== 0) {
                 this.isFilterInteraction = true;
-                bbicustom.dashboard.filterData(this, selectedFilterValue);
+                ej.dashboard.filterData(this, selectedFilterValue);
             }
         }
 		$("#"+this.designId).find("#"+ this.element.getAttribute("id") + "_widget").hide();
     },
 
     cancelFilter: function () {
-        var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+        var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 		widgetInstance.clearFilter();
 		$("#"+this.designId).find("#"+ this.element.getAttribute("id") + "_widget").hide();
-		//bbicustom.dashboard.filterData(this, []);
+		//ej.dashboard.filterData(this, []);
 		/*this["FilteredWidgetValues"] = {};
 		var widget = document.getElementById(this.element.getAttribute("id") + "_widget");
         $(widget).css({
             "height": $(this.element).height() + "px", "width": $(this.element).width() + "px", "border": "1px solide #b3b3b3"
         });
         $(widget).children().remove();
-		bbicustom.dashboard.filterData(this, []);
+		ej.dashboard.filterData(this, []);
         this.renderElement();*/
     },
 
@@ -399,7 +399,7 @@ bbicustom.dashboard.registerWidget({
         else if (option.type === "refresh") {
         }
 		else if(option.type === "clearFilter"){
-			//this.widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+			//this.widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
 			//this.widgetInstance.clearFilter();
 			this["FilteredWidgetValues"] = {};
 			var widget = document.getElementById(this.element.getAttribute("id") + "_widget");

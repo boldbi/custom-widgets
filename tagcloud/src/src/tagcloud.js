@@ -1,4 +1,4 @@
-﻿bbicustom.dashboard.registerWidget({
+ej.dashboard.registerWidget({
 
     guid:"fffbbfe5-c9fc-4951-a1d8-2a7e953781a0",
 
@@ -13,7 +13,7 @@
 	    if (this.model.boundColumns.Text.length > 0 && this.model.boundColumns.Frequency.length > 0) {
 			data = [];
 			for( var i=0; i < this.model.dataSource.length;i++) {
-				if(!BoldBIDashboard.isNullOrUndefined(this.model.dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName])&& !BoldBIDashboard.isNullOrUndefined(this.model.dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName])){
+				if(!ej.isNullOrUndefined(this.model.dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName])&& !ej.isNullOrUndefined(this.model.dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName])){
 					data.push({text:this.model.dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName],frequency:this.model.dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName]});
 				}
 			}
@@ -32,7 +32,7 @@
 	formatData : function (dataSource) {
 		var data = [];
 		for( var i=0; i < dataSource.length;i++) {
-			if(!BoldBIDashboard.isNullOrUndefined(dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName]) && !BoldBIDashboard.isNullOrUndefined(dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName])){
+			if(!ej.isNullOrUndefined(dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName]) && !ej.isNullOrUndefined(dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName])){
 				data.push({text:dataSource[i][this.model.boundColumns.Text[0].uniqueColumnName],frequency:dataSource[i][this.model.boundColumns.Frequency[0].uniqueColumnName]});
 			}
 		}
@@ -42,12 +42,12 @@
 	selectionChanged : function (e) {
 		if(e.value !== null && e.value !== undefined){
 			var selectedFilterInfos = [];
-			var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
+			var filterinfo = new ej.dashboard.selectedColumnInfo();
 			filterinfo.condition = "Include";
 			filterinfo.uniqueColumnName = this.model.boundColumns.Text[0].uniqueColumnName;
 			filterinfo.values.push(e.value);
 			selectedFilterInfos.push(filterinfo);
-			bbicustom.dashboard.filterData(this,selectedFilterInfos);
+			ej.dashboard.filterData(this,selectedFilterInfos);
 		}
 	},
     update: function (option) {
