@@ -1,0 +1,268 @@
+﻿{
+  "widgetName": "CustomBoxandWhiskerChart",
+  "guid": "666b74a1-ce19-4981-bc02-f475ed39d477",
+  "displayName": "BoxandWhisker Chart",
+  "category": "Miscellaneous",
+  "description": "Box and Whisker chart is used to visualize graphically depicting groups of numerical data through their quartiles.",
+  "srcFile": "src/sourcefile.js",
+  "version": "4.2.0.0",
+  "dependencies": {
+    "scripts": [
+      "src/ej2Controls.min.js"
+    ]
+  },
+  "dataFields": [
+    {
+      "displayName": "Y-Value",
+      "valueType": "Both",
+      "name": "yValue",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+    },
+    {
+      "displayName": "X-Value",
+      "valueType": "dimension",
+      "name": "xValue",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+    },
+	{
+      "displayName": "Row",
+      "valueType": "dimension",
+      "name": "row",
+      "min": "1",
+      "max": "1",
+      "optional": "false"
+    }
+  ],
+  "functionalities": [
+	{
+      "header": "GridLine Settings",
+      "properties": [
+        {
+          "displayName": "Category Axis",
+          "controlType": "bool",
+          "name": "showGridLineForXaxis",
+          "defaultValue": "false"
+        },
+        {
+          "displayName": "PrimaryValue Axis",
+          "controlType": "bool",
+          "name": "showGridLineForYaxis",
+          "defaultValue": "false"
+        }
+      ]
+    },
+    {
+      "header": "Basic Settings",
+      "properties": [
+		{
+          "displayName": "Show Mean",
+          "controlType": "bool",
+          "name": "mean",
+          "defaultValue": "false"
+        },
+		{
+          "displayName": "Enable Animation",
+          "controlType": "bool",
+          "name": "enableAnimation",
+          "defaultValue": "false"
+        },
+        {
+          "displayName": "Show Legend",
+          "controlType": "bool",
+          "name": "showLegend",
+          "defaultValue": "false"
+        },
+		{
+          "displayName": "Legend Position",
+          "controlType": "enumeration",
+          "name": "legendPosition",
+          "defaultValue": "Bottom",
+		  "listItems": [
+            "Top",
+            "Bottom",
+			"Left",
+			"Right"
+          ]
+        },
+        {
+          "displayName": "Show Datalabels",
+          "controlType": "bool",
+          "name": "showDatalabels",
+          "defaultValue": "false"
+        },
+        {
+          "displayName": "DataLabel FontSize",
+          "controlType": "number",
+          "name": "datalabelFontSize",
+          "defaultValue": "11",
+          "min": "0",
+          "max": "50"
+        }
+      ]
+    },
+	{
+		"header": "Color Settings",
+		"properties": [
+		{
+			"displayName": "Color 1",
+			"controlType": "color",
+			"name": "color1",
+			"defaultValue": "#00b9ac"
+		},
+		{
+			"displayName": "Color 2",
+			"controlType": "color",
+			"name": "color2",
+			"defaultValue": "#cccbcb"
+		},
+		{
+			"displayName": "Color 3",
+			"controlType": "color",
+			"name": "color3",
+			"defaultValue": "#fd625e"
+		},
+		{
+			"displayName": "Color 4",
+			"controlType": "color",
+			"name": "color4",
+			"defaultValue": "#f2c907"
+		},
+		{
+			"displayName": "Color 5",
+			"controlType": "color",
+			"name": "color5",
+			"defaultValue": "#5f6b6d"
+		},
+		{
+			"displayName": "Color 6",
+			"controlType": "color",
+			"name": "color6",
+			"defaultValue": "#357cd2"
+		},
+		{
+			"displayName": "Color 7",
+			"controlType": "color",
+			"name": "color7",
+			"defaultValue": "#e56590"
+		},
+		{
+			"displayName": "Color 8",
+			"controlType": "color",
+			"name": "color8",
+			"defaultValue": "#f8b883"
+		},
+		{
+			"displayName": "Color 9",
+			"controlType": "color",
+			"name": "color9",
+			"defaultValue": "#70ad47"
+		},
+		{
+			"displayName": "Color 10",
+			"controlType": "color",
+			"name": "color10",
+			"defaultValue": "#7f84e8"
+		}
+	  ]
+	},
+    {
+      "header": "Categoryaxis Settings",
+      "properties": [
+        {
+          "displayName": "Show CategoryAxis",
+          "controlType": "bool",
+          "name": "showCategoryAxis",
+          "defaultValue": "true"
+        },
+        {
+          "displayName": "Show CategoryAxis Title",
+          "controlType": "bool",
+          "name": "showCategoryAxisTitle",
+          "defaultValue": "false"
+        },
+        {
+          "displayName": "Show CategoryAxis Titletext",
+          "controlType": "text",
+          "name": "showCategoryAxisTitletext",
+          "defaultValue": " "
+        },
+        {
+          "displayName": "Label Overflow Mode",
+          "controlType": "enumeration",
+          "name": "labelOverflowMode",
+          "defaultValue": "Hide",
+          "listItems": [
+            "Hide",
+            "Trim"
+          ]
+        },
+        {
+          "displayName": "Label Rotation",
+          "controlType": "enumeration",
+          "name": "labelRotation",
+          "defaultValue": "0",
+          "listItems": [
+            "0",
+            "-45",
+            "-90",
+            "45",
+            "90"
+          ]
+        },
+        {
+          "displayName": "Label FontSize",
+          "controlType": "number",
+          "name": "xlabelFontSize",
+          "defaultValue": "11",
+          "min": "0",
+          "max": "50"
+        }
+      ]
+    },
+    {
+      "header": "Primaryaxis Settings",
+      "properties": [
+        {
+          "displayName": "Show PrimaryAxis",
+          "controlType": "bool",
+          "name": "showPrimaryAxis",
+          "defaultValue": "true"
+        },
+        {
+          "displayName": "Show PrimaryAxis Title",
+          "controlType": "bool",
+          "name": "showPrimaryAxisTitle",
+          "defaultValue": "false"
+        },
+        {
+          "displayName": "Show PrimaryAxis Titletext",
+          "controlType": "text",
+          "name": "showPrimaryAxisTitletext",
+          "defaultValue": " "
+        },
+        {
+          "displayName": "Label FontSize",
+          "controlType": "number",
+          "name": "ylabelFontSize",
+          "defaultValue": "11",
+          "min": "0",
+          "max": "50"
+        }
+      ]
+    }
+  ],
+  "filterSettings": {
+    "masterFilter": {
+      "visible": "true",
+      "defaultValue": "false"
+    },
+    "ignoreMasterFilter": {
+      "visible": "true",
+      "defaultValue": "false"
+    }
+  }
+}
