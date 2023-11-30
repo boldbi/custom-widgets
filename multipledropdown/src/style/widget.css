@@ -1,0 +1,133 @@
+﻿.e-dbrd-custom-dropdown-widget .e-multiselect {
+    border: none !important;
+}
+.e-dbrd-custom-dropdown-widget .e-multi-select-wrapper {
+    padding-left: 10px !important;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+}
+.e-dbrd-custom-dropdown-widget .e-multiselect::before,
+.e-dbrd-custom-dropdown-widget .e-multiselect::after {
+    background: none !important;
+}
+
+.e-dbrd-custom-multiselect-cancel-button {
+    background: #ccc;
+    border-color: #b3b3b3;
+    box-shadow: none;
+    color: #333;
+    outline: #fafafa 0 solid;
+    transition: all .1s linear;
+    min-width: 100px;
+    height: 29px;
+    font-size: 13px;
+    letter-spacing: .3px;
+    line-height: 27px;
+    font-weight: 500;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+    .e-dbrd-custom-multiselect-cancel-button:hover {
+        background: #ccc;
+    }
+
+.e-dbrd-custom-multiselect-apply-button {
+    border: 1px solid;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    min-width: 100px;
+    height: 29px;
+    font-family: 'Roboto','Heebo','Segoe UI';
+    font-size: 13px;
+    letter-spacing: .3px;
+    line-height: 25px;
+    font-weight: 500;
+    background: #0565ff;
+    border-color: #0450cc;
+    color: #fff;
+    outline: #fafafa 0 solid;
+    transition: all .1s linear;
+}
+        .e-dbrd-custom-multiselect-apply-button:hover {
+            background: #0565ff;
+        }
+.e-multi-select-list-wrapper .e-filter-parent .e-input-group::before,
+.e-multi-select-list-wrapper .e-filter-parent .e-input-group::after {
+    background: #0565ff !important;
+}
+
+.e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    border-radius: 5px;
+}
+
+    .e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar:horizontal {
+        background-color: transparent;
+        height: 5px;
+        border-radius: 5px;
+    }
+
+.e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: rgba(198, 203, 209,0.3);
+}
+
+.e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #C6CBD1;
+    border-radius: 5px;
+}
+
+    .e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar-thumb:hover {
+        background: #808080;
+    }
+
+    .e-dbrd-custom-dropdown-widget .e-dbrd-custom-multiple-dropdown-container::-webkit-scrollbar-thumb:active {
+        background: #4D4D4D;
+    }
+	
+   .e-dbrd-custom-multiselect-filter-button {
+    border: 1px solid;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 8px; 
+    position: relative;
+	min-width: 80px;
+    text-align: center;
+    /* vertical-align: middle; */
+    /* white-space: nowrap; */
+    height: 30px;
+    font-family: 'Roboto','Heebo','Segoe UI';
+    font-size: 13px;
+    letter-spacing: .3px;
+    line-height: 25px;
+    font-weight: 500;
+    background: #0565ff;
+    border-color: #0450cc;
+    color: #fff;
+    /* outline: #fafafa 0 solid;
+    transition: all .1s linear;  */
+    } 
+
+    .e-dbrd-custom-multiselect-filter-button:hover{background: dodgerblue;}
+.custom_multicombobox_popup{
+	padding-top:0px !important;
+	height: 100% !important;
+}
