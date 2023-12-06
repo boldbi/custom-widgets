@@ -1,0 +1,172 @@
+﻿{
+    "widgetName": "SunburstChart",
+    "displayName": "Sunburst Chart",
+    "guid": "b0d5348d-f625-4b78-8db9-c5ed9d38eb45",
+    "category": "Miscellaneous",
+	"version": "4.2.0.0",
+	"srcFile": "src/sunburst.js",
+    "dependencies": { "scripts": [ "src/ej.sunburstchart.min.js" ] },
+    "description": "Sunburst Chart is useful for visualizing hierarchical data. The center circle represents the root level in the hierarchy, with outer circles representing higher levels of the hierarchy.",
+    "dataFields": [
+        { 
+			"displayName": "Value", 
+			"valueType": "measure", 
+			"name": "Value", 
+			"min": 1, 
+			"max": 1, 
+			"optional": false 
+		},
+        { 
+			"displayName": "Levels", 
+			"valueType": "dimension", 
+			"name": "Levels", 
+			"min": 1, 
+			"max": 4, 
+			"optional": false 
+		},
+		{ 
+			"displayName": "Tooltip(s)", 
+			"valueType": "measure", 
+			"name": "tooltip", 
+			"min": 1, 
+			"max": 5, 
+			"optional": true 
+		},
+		{ 
+			"displayName": "Filter(s)", 
+			"valueType": "dimension", 
+			"name": "filter", 
+			"min": 1, 
+			"max": 5, 
+			"optional": true 
+		}
+    ],
+	"functionalities": [
+		{
+		"header": "Basic Settings",
+		"properties": [
+		{
+          "displayName": "Enable Animation",
+          "controlType": "bool",
+          "name": "animation",
+          "defaultValue": "false"
+        },
+		{
+          "displayName": "Show Data Label",
+          "controlType": "bool",
+          "name": "showDataLabel",
+          "defaultValue": "true"
+        },
+		{
+          "displayName": "Data Label Rotation",
+          "controlType": "enumeration",
+          "name": "dlRotation",
+          "defaultValue": "Normal",
+		  "listItems": [
+            "Normal",
+            "Angle"
+          ]
+        },
+		{
+          "displayName": "Label Overflow Mode",
+          "controlType": "enumeration",
+          "name": "labelOverflowMode",
+          "defaultValue": "Trim",
+		  "listItems": [
+            "Hide",
+            "Trim"
+          ]
+        }
+      ]
+    },
+		{
+		"header": "Legend Settings",
+		"properties": [
+		{
+          "displayName": "Show Legend",
+          "controlType": "bool",
+          "name": "showLegend",
+          "defaultValue": "false"
+        },
+		{
+          "displayName": "Legend Position",
+          "controlType": "enumeration",
+          "name": "legendPosition",
+          "defaultValue": "Bottom",
+		  "listItems": [
+            "Top",
+            "Left",
+			"Right",
+			"Bottom"
+          ]
+        }
+      ]
+    },
+	{
+		"header": "Color Settings",
+		"properties": [
+		{
+          "displayName": "Point 1 color",
+          "controlType": "color",
+          "name": "p1Color",
+          "defaultValue": "#8d9aa2"
+        },
+		{
+          "displayName": "Point 2 color",
+          "controlType": "color",
+          "name": "p2Color",
+          "defaultValue": "#515e66"
+        },
+		{
+          "displayName": "Point 3 color",
+          "controlType": "color",
+          "name": "p3Color",
+          "defaultValue": "#0ebcd7"
+        },
+		{
+          "displayName": "Point 4 color",
+          "controlType": "color",
+          "name": "p4Color",
+          "defaultValue": "#6517c1"
+        },
+		{
+          "displayName": "Point 5 color",
+          "controlType": "color",
+          "name": "p5Color",
+          "defaultValue": "#b061fa"
+        },
+		{
+          "displayName": "Point 6 color",
+          "controlType": "color",
+          "name": "p6Color",
+          "defaultValue": "#826AF9"
+        },
+		{
+          "displayName": "Point 7 color",
+          "controlType": "color",
+          "name": "p7Color",
+          "defaultValue": "#2D99FF"
+        },
+		{
+          "displayName": "Point 8 color",
+          "controlType": "color",
+          "name": "p8Color",
+          "defaultValue": "#2CD9C5"
+        },
+		{
+          "displayName": "Point 9 color",
+          "controlType": "color",
+          "name": "p9Color",
+          "defaultValue": "#FF6C40"
+        },
+		{
+          "displayName": "Point 10 color",
+          "controlType": "color",
+          "name": "p10Color",
+          "defaultValue": "#FFE700"
+        }
+      ]
+    }
+	],
+    "filterSettings": { "masterFilter": { "visible": true, "defaultValue": false }, "ignoreMasterFilter": { "visible": true, "defaultValue": false } },
+}

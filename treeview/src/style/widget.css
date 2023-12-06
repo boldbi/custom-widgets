@@ -1,0 +1,14 @@
+﻿.e-dbrd-custom-treeview-popup-close {
+    height: 25px;
+    width: 25px;
+    font-family: dashboard_webdesigner_font;
+    float: right;
+    line-height: 23px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.e-dbrd-custom-treeview-popup-close:before{
+    content: '\e901';
+    font-size: 12px;
+    padding: 0px 6px;
+}

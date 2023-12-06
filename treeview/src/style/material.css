@@ -1,0 +1,122 @@
+﻿.e-treeview .e-list-item {
+    list-style: none;
+    padding: 2px 0;
+}
+.e-treeview .e-text-content, .e-treeview .e-fullrow {
+    border-color: rgba(0,0,0,0);
+}
+.e-treeview .e-fullrow {
+    user-select: none;
+    cursor: pointer;
+    height: 32px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+.e-treeview.e-fullrow-wrap .e-text-content {
+    border-color: transparent;
+}
+.e-treeview.e-fullrow-wrap .e-text-content {
+    pointer-events: none;
+    position: relative;
+}
+.e-treeview .e-text-content {
+    user-select: none;
+    border: 1px solid;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 0 0 24px;
+}
+
+.e-treeview .e-checkbox-wrapper {
+    margin: 0 0 0 5px;
+    pointer-events: all;
+    position: relative;
+}
+
+e-checkbox-wrapper, .e-css.e-checkbox-wrapper {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    outline: none;
+    user-select: none;
+}
+
+.e-treeview .e-list-text {
+    color: rgba(0,0,0,0.87);
+    font-size: 13px;
+}
+
+.e-treeview .e-checkbox-wrapper+.e-list-text {
+    padding: 0 10px;
+}
+
+.e-treeview .e-list-text {
+    box-sizing: border-box;
+    line-height: 30px;
+    margin: 0;
+    min-height: 30px;
+    padding: 0 5px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.e-treeview .e-list-item div.e-icons::before {
+    content: '\e22f';
+}
+
+.e-treeview .e-icon-collapsible::before, .e-treeview .e-icon-expandable::before {
+    font-size: 10px;
+}
+
+.e-treeview .e-icon-collapsible::before, .e-treeview .e-icon-expandable::before {
+    display: inline-block;
+    padding: 7px;
+}
+
+.e-treeview.e-fullrow-wrap .e-icon-collapsible, .e-treeview.e-fullrow-wrap .e-icon-expandable, .e-treeview.e-fullrow-wrap .e-input, .e-treeview.e-fullrow-wrap .e-list-url {
+    pointer-events: auto;
+}
+
+.e-treeview .e-icon-collapsible, .e-treeview .e-icon-expandable {
+    color: rgba(0,0,0,0.54);
+}
+
+.e-treeview .e-icon-collapsible, .e-treeview .e-icon-expandable {
+    display: inline-block;
+    height: 24px;
+    margin: 0 0 0 -24px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.e-treeview .e-list-item div.e-icons.interaction {
+    border-radius: 15px;
+}
+.e-treeview .e-list-item .e-icons.e-icon-collapsible {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.e-treeview .e-list-item.e-active>.e-fullrow {
+    background-color: #eee;
+    border-color: #eee;
+}
+
+.e-treeview .e-list-item.e-active>.e-fullrow {
+    background-color: #eee;
+    border-color: #eee;
+}
+
+.e-treeview .e-list-item.e-active>.e-text-content .e-list-text {
+    color: #e3165b;
+}
+
+.e-treeview .e-list-item.e-active>.e-text-content {
+    color: #e3165b;
+}
+
+.e-treeview>.e-ul {
+	overflow: hidden;
+}
