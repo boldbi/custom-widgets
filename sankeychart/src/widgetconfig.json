@@ -1,4 +1,4 @@
-{
+﻿{
   "widgetName": "SankeyChart",
   "guid": "0e38aa64-4b45-4a50-8457-cad3957adeec",
   "displayName": "SankeyChart",
@@ -24,17 +24,17 @@
       "optional": "false"
     },
     {
-      "displayName": "Source",
+      "displayName": "Column(s)",
       "valueType": "dimension",
-      "name": "source",
+      "name": "column",
       "min": "1",
-      "max": "1",
+      "max": "6",
       "optional": "false"
     },
 	{
-      "displayName": "Target",
-      "valueType": "dimension",
-      "name": "target",
+      "displayName": "Filter(s)",
+      "valueType": "both",
+      "name": "FilterColumn",
       "min": "1",
       "max": "1",
       "optional": "false"
@@ -54,24 +54,24 @@
           "displayName": "Orientation",
           "controlType": "enumeration",
           "name": "orient",
-          "defaultValue": "horizontal",
+          "defaultValue": "Horizontal",
 		  "listItems": [
-            "horizontal",
-            "vertical",
+            "Horizontal",
+            "Vertical",
           ]
         },
 		{
           "displayName": "Label Position",
           "controlType": "enumeration",
           "name": "labelPosition",
-          "defaultValue": "right",
+          "defaultValue": "Right",
 		  "listItems": [
-            "right",
-            "left",
-            "top",
-            "bottom",
-            "inside",
-            "outside",
+            "Right",
+            "Left",
+            "Top",
+            "Bottom",
+            "Inside",
+            "Outside",
           ]
         },
         {
@@ -92,93 +92,64 @@
           "displayName": "Link Color",
           "controlType": "enumeration",
           "name": "linkColor",
-          "defaultValue": "source",
+          "defaultValue": "Source",
 		  "listItems": [
-            "source",
-            "target",
+            "Source",
+            "Target",
           ]
         },
+		{
+          "displayName": "Auto Align Nodes",
+          "controlType": "bool",
+          "name": "nodeAdjustment",
+          "defaultValue": true
+        }
       ]
     },
 	{
-      "header": "Source Color Settings",
+      "header": "Color Settings",
       "properties": [
         {
-          "displayName": "Source Color 1",
+          "displayName": "Color 1",
           "controlType": "color",
           "name": "sourceColor0",
           "defaultValue": "#8BD3E1"
         },
         {
-          "displayName": "Source Color 2",
+          "displayName": "Color 2",
           "controlType": "color",
           "name": "sourceColor1",
           "defaultValue": "#E57368"
         },
         {
-          "displayName": "Source Color 3",
+          "displayName": "Color 3",
           "controlType": "color",
           "name": "sourceColor2",
           "defaultValue": "#FBCB43"
         },
         {
-          "displayName": "Source Color 4",
+          "displayName": "Color 4",
           "controlType": "color",
           "name": "sourceColor3",
           "defaultValue": "#34B67A"
         },
         {
-          "displayName": "Source Color 5",
+          "displayName": "Color 5",
           "controlType": "color",
           "name": "sourceColor4",
           "defaultValue": "#ABAABF"
         },
       ]
-    },
-	{
-      "header": "Target Color Settings",
-      "properties": [
-        {
-          "displayName": "Target Color 1",
-          "controlType": "color",
-          "name": "targetColor0",
-          "defaultValue": "#CC6882"
-        },
-        {
-          "displayName": "Target Color 2",
-          "controlType": "color",
-          "name": "targetColor1",
-          "defaultValue": "#85A67C"
-        },
-        {
-          "displayName": "Target Color 3",
-          "controlType": "color",
-          "name": "targetColor2",
-          "defaultValue": "#758AD6"
-        },
-        {
-          "displayName": "Target Color 4",
-          "controlType": "color",
-          "name": "targetColor3",
-          "defaultValue": "#AA89B7"
-        },
-        {
-          "displayName": "Target Color 5",
-          "controlType": "color",
-          "name": "targetColor4",
-          "defaultValue": "#FAF39A"
-        }
-      ]
-    },
+    }
   ],
   "filterSettings": {
     "masterFilter": {
-      "visible": "true",
-      "defaultValue": "false"
+      "visible": true,
+      "defaultValue": true
     },
     "ignoreMasterFilter": {
-      "visible": "true",
-      "defaultValue": "false"
+      "visible": true,
+      "defaultValue": false
     }
   }
 }
