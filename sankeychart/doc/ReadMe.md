@@ -3,7 +3,7 @@
 A Sankey chart is a type of flow diagram that illustrating the distribution of resources, the progression of a process, or the allocation of values within a system.
 
 > [!NOTE] 
-> This product (Sankey Chart) is a sample and does not contain Syncfusion code. This is for illustrative purposes only and Syncfusion does not provide any warranty or indemnity. Use at your own risk and use professional skill and judgment
+> This Sankey Chart is a sample and does not contain Syncfusion code. This is for illustrative purposes only and Syncfusion does not provide any warranty or indemnity. Use at your own risk and use professional skill and judgment.
  
 **Use Case**
 
