@@ -1,4 +1,4 @@
-/* Register the widget in dashboard.*/
+﻿/* Register the widget in dashboard.*/
 bbicustom.dashboard.registerWidget({
 
     guid:"0e38aa64-4b45-4a50-8457-cad3957adeec",
@@ -29,19 +29,37 @@ bbicustom.dashboard.registerWidget({
 				type: 'sankey',
 				data: this.getData(),
 				links: this.getLink(),
-				left: ((this.model.properties.labelPosition == 'left')?"15%":"7.5%"),
-				right:((this.model.properties.labelPosition == 'right')?"15%":"7.5%"),
+				emphasis: {
+					focus: 'adjacency'
+				},
+				left: ((this.model.properties.labelPosition.toLowerCase() == 'left')?"15%":"7.5%"),
+				right:((this.model.properties.labelPosition.toLowerCase() == 'right')?"15%":"7.5%"),
 				lineStyle: {
-					color: this.model.properties.linkColor,
+					color: this.model.properties.linkColor.toLowerCase(),
 					curveness: 0.5
 				},
-				orient: this.model.properties.orient,
+				orient: this.model.properties.orient.toLowerCase(),
 				label: {
-					position: this.model.properties.labelPosition,
+					position: this.model.properties.labelPosition.toLowerCase(),
 					color: this.model.properties.labelColor,
 					fontFamily: 'Arial',
 					fontSize: this.model.properties.labelFontSize
-				} 
+				},
+				levels: [
+					{
+					  depth: 0
+					},
+					{
+					  depth: 1
+					},
+					{
+					  depth: 2
+					},
+					{
+					  depth: 3
+					}
+				],
+				layoutIterations: this.model.properties.nodeAdjustment ? 32:0
 			}],
 			tooltip: {
 				trigger: 'item',
@@ -59,46 +77,30 @@ bbicustom.dashboard.registerWidget({
 		if (option && typeof option === 'object') {
 			myChart.setOption(option);
 		}
-		myChart.on('click', function(params){
-			var that = window.that;
-			if(that.model.dataSource.length > 0 && that.widgetInstance.designerInstance.model.mode != 'design'){
-				that.widgetInstance = $(that.element).closest(".e-customwidget-item").data("widgetInstance");
-				var uniqueColumnName = [];
-				var data = [];
-				var selectedFilterInfos = [];
-				for(var k = 1; k < that.widgetInstance.dataGroupInfo.FieldContainers.length; k++){
-					for(var i = 0; i< that.model.dataSource.length; i++){
-						var tempText = that.model.dataSource[i][that.widgetInstance.dataGroupInfo.FieldContainers[k].FieldInfos[0].UniqueColumnName];
-						if(params.data.source != undefined && params.data.target != undefined){
-							if (tempText == params.data.source || tempText == params.data.target) {
-								if (data.indexOf(tempText) == -1 && tempText != '(Null)') {
-									uniqueColumnName.push(that.widgetInstance.dataGroupInfo.FieldContainers[k].FieldInfos[0].UniqueColumnName);
-									data.push(tempText);
-								}
-							}
-						}
-						else{
-							if (tempText == params.data.name) {
-								if (data.indexOf(tempText) == -1 && tempText != '(Null)') {
-									uniqueColumnName.push(that.widgetInstance.dataGroupInfo.FieldContainers[k].FieldInfos[0].UniqueColumnName);
-									data.push(tempText);									
-								}
-							}
-						}
-					}
-				}
-				for(var i = 0; i <data.length; i++){
-					var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
-					filterinfo.condition = "Include";
-					filterinfo.uniqueColumnName = uniqueColumnName[i];
-					filterinfo.values = data[i];
-					selectedFilterInfos.push(filterinfo);	
-				}
-				bbicustom.dashboard.filterData(that, selectedFilterInfos);
-			}
-		});
+		myChart.on('click', $.proxy(this.sankeyClick, this));
     },
 	
+	sankeyClick: function(params) {
+		if(this.model.dataSource.length > 0 && this.widgetInstance.designerInstance.model.mode != 'design'){
+			this.widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
+			var uniqueColumnName = [];
+			var data = [];
+			var selectedFilterInfos = [];
+			for(var k = 0; k < this.model.boundColumns.column.length; k++){
+				var ucn = this.model.boundColumns.column[k].uniqueColumnName;
+				var value = [...new Set(this.model.dataSource.map((item) => item[ucn]))].indexOf(params.name) > -1 ? params.name:"";
+				if(value != ""){
+					var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
+					filterinfo.condition = "Include";
+					filterinfo.uniqueColumnName = ucn;
+					filterinfo.values = value;
+					selectedFilterInfos.push(filterinfo);	
+					break;
+				}
+			}
+			bbicustom.dashboard.filterData(this, selectedFilterInfos);
+		}
+	},
 	formatDataNumber: function (number) {
 		var number = Number(number);
 		var formatInfo = this.formattingInfo[this.model.boundColumns.value[0].uniqueColumnName];
@@ -111,39 +113,31 @@ bbicustom.dashboard.registerWidget({
 		this.uniqueSourceValues = [];
 		this.uniqueTargetValues = [];
 		if(this.isWidgetConfigured()){
-			for(var i=0; i<this.model.dataSource.length; i++){
-				var tempText = this.model.dataSource[i][this.model.boundColumns.source[0].uniqueColumnName];
-				if(this.uniqueSourceValues.indexOf(tempText) == -1 && tempText != '(Null)'){
-					this.uniqueSourceValues.push(tempText);
+			for(var i = 0; i < this.model.boundColumns.column.length; i++){
+				var nodes = [];
+				var ucn = this.model.boundColumns.column[i].uniqueColumnName;
+				nodes = [...new Set(this.model.dataSource.filter((item) => item[ucn] != "(Blanks)" && item[ucn] != "(Null)" && item[ucn] != null).map((item) => item[ucn]))];
+				
+				for(var j = 0; j < nodes.length; j++){
+					data.push({
+						name : nodes[j],
+						itemStyle: this.getSourceColors(j),
+						depth: i
+					});
 				}
 			}
-			for(var i=0; i<this.model.dataSource.length; i++){
-				var tempText = this.model.dataSource[i][this.model.boundColumns.target[0].uniqueColumnName];
-				if(this.uniqueTargetValues.indexOf(tempText) == -1 && tempText != '(Null)'){
-					this.uniqueTargetValues.push(tempText);
-				}
-			}
-			for(var i=0; i<this.uniqueSourceValues.length; i++){
-				data.push({
-					name : this.uniqueSourceValues[i],
-					itemStyle: this.getSourceColors(i)
-				});
-			}
-			for(var i=0; i<this.uniqueTargetValues.length; i++){
-				data.push({
-					name : this.uniqueTargetValues[i],
-					itemStyle: this.getTargetColors(i)
-				});
-			}
+			
 		}
 		else{
 			data = [
-				{name: 'a', itemStyle: {color:this.model.properties.sourceColor0,borderColor:this.model.properties.sourceColor0}},
-				{name: 'b', itemStyle: {color:this.model.properties.sourceColor1,borderColor:this.model.properties.sourceColor1}},
-				{name: 'a1', itemStyle: {color:this.model.properties.targetColor0,borderColor:this.model.properties.targetColor0}},
-				{name: 'a2', itemStyle: {color:this.model.properties.targetColor1,borderColor:this.model.properties.targetColor1}},
-				{name: 'b1', itemStyle: {color:this.model.properties.sourceColor2,borderColor:this.model.properties.sourceColor2}},
-				{name: 'c', itemStyle: {color:this.model.properties.targetColor2,borderColor:this.model.properties.targetColor2}}
+				{name: 'Item 1', itemStyle: {color:this.model.properties.sourceColor0,borderColor:this.model.properties.sourceColor0}},
+				{name: 'Item 2', itemStyle: {color:this.model.properties.sourceColor1,borderColor:this.model.properties.sourceColor1}},
+				{name: 'Value 1', itemStyle: {color:this.model.properties.targetColor0,borderColor:this.model.properties.targetColor0}},
+				{name: 'Value 2', itemStyle: {color:this.model.properties.targetColor1,borderColor:this.model.properties.targetColor1}},
+				{name: 'Value 3', itemStyle: {color:this.model.properties.sourceColor2,borderColor:this.model.properties.sourceColor2}},
+				{name: 'Value 4', itemStyle: {color:this.model.properties.targetColor2,borderColor:this.model.properties.targetColor2}},
+				{name: 'Value 5', itemStyle: {color:this.model.properties.targetColor2,borderColor:this.model.properties.targetColor2}},
+				{name: 'Value 6', itemStyle: {color:this.model.properties.targetColor2,borderColor:this.model.properties.targetColor2}}
 			];
 		}
 		return data;
@@ -176,29 +170,55 @@ bbicustom.dashboard.registerWidget({
 	getLink: function(){
 		var linkObj = [];
 		if(this.isWidgetConfigured()){
-			for(var i=0; i<this.model.dataSource.length; i++){
-				linkObj.push({
-					source : this.model.dataSource[i][this.model.boundColumns.source[0].uniqueColumnName], 
-					target: this.model.dataSource[i][this.model.boundColumns.target[0].uniqueColumnName],
-					value: this.model.dataSource[i][this.model.boundColumns.value[0].uniqueColumnName]
-				});
+			var unicSourceValues = [];
+			for(var x = 0; x < this.model.boundColumns.column.length-1; x++){
+				var sUCN = this.model.boundColumns.column[x].uniqueColumnName;
+				unicSourceValues = [...new Set(this.model.dataSource.map((item) => item[sUCN]))];
+				for(var i = 0; i < unicSourceValues.length; i++){
+					var filterValues = this.model.dataSource.filter(function(e){return (e[sUCN] == unicSourceValues[i])});
+					var tUCN = this.model.boundColumns.column[x+1].uniqueColumnName;
+					var uTargetValues = [];
+					for(var j = 0; j < filterValues.length; j++){
+						if(uTargetValues.indexOf(filterValues[j][tUCN]) === -1 && filterValues[j][tUCN] != "(Blanks)" && filterValues[j][tUCN] != "(Null)" && filterValues[j][tUCN] != null){
+							uTargetValues.push(filterValues[j][tUCN]);
+							linkObj.push({
+								source : unicSourceValues[i], 
+								target: filterValues[j][tUCN],
+								value: filterValues.filter((item)=> item[tUCN] == filterValues[j][tUCN]).reduce((total, obj) => obj[this.model.boundColumns.value[0].uniqueColumnName] + total,0)
+							});
+						}
+					}
+				}
 			}
 		}
 		else{
 			linkObj = [
-			  {source: 'a',target: 'a1',value: 5},
-			  {source: 'a',target: 'a2',value: 3},
-			  {source: 'b',target: 'b1',value: 8},
-			  {source: 'a',target: 'b1',value: 3},
-			  {source: 'b1',target: 'a1',value: 1},
-			  {source: 'b1',target: 'c',value: 2}
+			  {source: 'Item 1',target: 'Value 1',value: 5},
+			  {source: 'Item 1',target: 'Value 2',value: 3},
+			  {source: 'Item 2',target: 'Value 4',value: 8},
+			  {source: 'Item 1',target: 'Value 3',value: 3},
+			  {source: 'Item 1',target: 'Value 5',value: 5},
+			  {source: 'Item 1',target: 'Value 6',value: 3},
 			];
 		}
 		return linkObj;
 	},
-
+	getValue: function(srcName, tarName){
+		var value = 10;
+		if(this.isWidgetConfigured()){
+			var srcUCN = this.model.boundColumns.source[0].uniqueColumnName;
+			var tarUCN = this.model.boundColumns.target[0].uniqueColumnName;
+			var ucnVal = this.model.boundColumns.value[0].uniqueColumnName
+			var colData = this.model.dataSource.filter(function(e){return e[srcUCN] == srcName && e[tarUCN] == tarName});
+			if(colData.length > 0){
+				value = colData.map(e => e[ucnVal]).reduce(function(prev,cur){return prev+cur;},0);
+			}
+			
+		}
+		return value;
+	},
 	isWidgetConfigured: function () {
-		return (this.model.dataSource.length > 0 && this.model.boundColumns.value.length > 0 && this.model.boundColumns.source.length > 0 && this.model.boundColumns.target.length > 0);
+		return (this.model.dataSource.length > 0 && this.model.boundColumns.value.length > 0 && this.model.boundColumns.column.length > 1);
 	},
 
        update: function (option) {
