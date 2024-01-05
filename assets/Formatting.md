@@ -6,7 +6,7 @@ You can use number formats to change the appearance of numbers without changing 
 
 You can format the number values using the **formatNumber** method, as shown below.
 
-```
+```javascript
 bbicuston.dashboard.formatNumber(customwidgetObj, numberValue, columnInfo);
 ```
 
