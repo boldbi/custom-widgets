@@ -14,4 +14,4 @@ bbicuston.dashboard.getColumnColor(customwidgetObj, columnInfo);
 
 **Sample Image**
 
-![Basic Properties](Images/ColumnColor.png)
+![Basic Properties](images/ColumnColor.png)

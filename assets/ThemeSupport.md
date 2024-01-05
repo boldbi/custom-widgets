@@ -47,6 +47,7 @@ The values to the variables are inheritted from the application variables to mat
 In some cases, if the default theme variables are not sufficient, we can add new theme variables in the custom widget file, which is available in the [Theme Studio](https://github.com/bold-bi/boldbi-themestudio/blob/Customwidget-Changes-HFv7/themes/light/widgets/boldbi.custom.widgets.definition.css) repository. We can then generate the new theme file with the new variables and replace it in the Bold BI application to achieve it.
 
 **Applying theme variables in JS file**
+
 You can find the sample code to know how to apply theme variables into the javascript files.
 
 ```javascript
@@ -55,6 +56,7 @@ You can find the sample code to know how to apply theme variables into the javas
 ```
 
 **Applying theme variables in CSS file**
+
 You can find the sample code to know how to apply theme variables into the styleSheet(css) files.
 
 ```stylesheet
@@ -76,8 +78,8 @@ You can find the sample code to know how to apply theme variables into the style
 
 Dark theme mode
 
-![DarkTheme](Images/DarkTheme.png)
+![DarkTheme](images/DarkTheme.png)
 
 Light theme mode
 
-![LightTheme](Images/LightTheme.png)
+![LightTheme](images/LightTheme.png)

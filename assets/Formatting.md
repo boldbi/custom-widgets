@@ -14,4 +14,4 @@ bbicuston.dashboard.formatNumber(customwidgetObj, numberValue, columnInfo);
 
 **Sample Image**
 
-![Basic Properties](Images/Formatting.png)
+![Basic Properties](images/Formatting.png)
