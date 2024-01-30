@@ -23,4 +23,14 @@ steps:
       npm run packall
   displayName: Create and Packall
 - bash: ls -R $(System.DefaultWorkingDirectory)
-
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'Aws access'
+    regionName: 'us-east-2'
+    bucketName: $(s3-bucket-name)
+    sourceFolder: '$(System.DefaultWorkingDirectory)/dist'
+    targetFolder: wp/custom-widgets/
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
+    artifactName: 'distFiles'
