@@ -23,9 +23,9 @@ steps:
       npm run packall
   displayName: Create and Packall
 - bash: ls -R $(System.DefaultWorkingDirectory)
-- script: |
-    echo "s3-bucket-name"
-    $(s3-bucket-name)
+# - script: |
+#     echo "s3-bucket-name"
+#     $(s3-bucket-name)
     
 - task: S3Upload@1
   inputs:
