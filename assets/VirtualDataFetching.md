@@ -2,7 +2,7 @@
 
 The virtual data fetching feature provides you with the ability to significantly customize the amount of data returned by the server. However, this feature should be utilized to retrieve limited data for the client. If necessary, we can then request the server to obtain the remaining data by utilizing its page size.
 
-You can follow the below steps to achieve the virtual data fetching support in custom widgets.
+You can follow the steps below to achieve virtual data fetching support in custom widgets.
 
 **Step1:** You can enable the virtual data fetching support in custom widget with the use of enabling it in the json attributes as below.
 
@@ -23,7 +23,7 @@ You can follow the below steps to achieve the virtual data fetching support in c
   ...
 }
 ```
-**Step2:** After enabled this json attributes by default you will get the firts 100 data in custom widget. After that you can request the next 100 data with the use of below code. We will maintain the current pageIndex details in the custom widget model as like below.
+**Step2:** After enabling these JSON attributes, you will by default receive the first 100 data in the custom widget. To request the next 100 data, use the code below. Maintain the current page index details in the custom widget model as shown below.
 
 **bbicustom.dashboard.fetchData(currentcustomwidget ,pageIndex, enableWaitingIndicator);**
 
