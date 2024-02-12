@@ -30,11 +30,8 @@ steps:
   condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
   inputs:
     awsCredentials: 'Aws access'
-    regionName: 'us-east-2'
+    regionName: us-east-2
     bucketName: $(s3-bucket-name)
-    sourceFolder: '$(System.DefaultWorkingDirectory)/dist'
-    targetFolder: wp/custom-widgets/
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
-    artifactName: 'distFiles'
+    sourceFolder: $(sourceFolder)
+    filesAcl: 'public-read'
+    targetFolder: $(targetFolder)
