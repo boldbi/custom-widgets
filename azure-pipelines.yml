@@ -30,7 +30,7 @@ steps:
   condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
   inputs:
     awsCredentials: 'Aws access'
-    regionName: us-east-2
+    regionName: 'us-east-2'
     bucketName: $(s3-bucket-name)
     sourceFolder: $(sourceFolder)
     filesAcl: 'public-read'
