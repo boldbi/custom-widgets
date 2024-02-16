@@ -1,5 +1,5 @@
-/* Register the widget in dashboard.*/
-ej.dashboard.registerWidget({
+﻿/* Register the widget in dashboard.*/
+bbicustom.dashboard.registerWidget({
 
     guid:"666b74a1-ce19-4981-bc02-f475ed39d477",
 
@@ -11,11 +11,11 @@ ej.dashboard.registerWidget({
         this.widget.setAttribute("id", this.element.getAttribute("id") + "_widget");
         this.element.appendChild(this.widget);
 		if(this.model.dataSource.length > 0 && this.model.boundColumns.yValue.length > 0 && this.model.boundColumns.xValue.length > 0){
-			this.designId = $(this.element).closest(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
-			this.designerObj = $("#" + this.designId).data("ejDashboardDesigner");
+			this.designId = $(this.element).closest(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
+			this.designerObj = $("#" + this.designId).data("BoldBIDashboardDesigner");
 			this.formattingInfo = {};
 			this.editedColumnNames = {};
-			var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 			for(var j = 0; j<widgetInstance.dataGroupInfo.FieldContainers.length; j++){
 				if(widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0 && widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0){
 					var length = widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length;
@@ -60,14 +60,14 @@ ej.dashboard.registerWidget({
 	textRender: function(args){
 		if(this.model.dataSource.length > 0 && this.model.boundColumns.xValue.length > 0 && this.model.boundColumns.yValue.length > 0){
 			var formatInfo = this.formattingInfo[this.model.boundColumns.yValue[0].uniqueColumnName];
-			args.text = ej.DashboardUtil.formattedText(Number(args.text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+			args.text = BoldBIDashboard.DashboardUtil.formattedText(Number(args.text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		}
 	},
 	axisLabelRender: function(args){
 		if(this.model.dataSource.length > 0 && this.model.boundColumns.xValue.length > 0 && this.model.boundColumns.yValue.length > 0){
 			if(args.axis.orientation == "Vertical"){
 				var formatInfo = JSON.parse("{\"Culture\":\"auto\",\"DecimalPoints\":2,\"FormatType\":\"Number\",\"Prefix\":\"\",\"Suffix\":\"\",\"DecimalSeparator\":{\"AliasValue\":\".\",\"CurrentValue\":\".\"},\"GroupSeparator\":{\"AliasValue\":\",\",\"CurrentValue\":\",\"},\"Unit\":\"Auto\"}");
-				args.text = ej.DashboardUtil.formattedText(Number(args.text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+				args.text = BoldBIDashboard.DashboardUtil.formattedText(Number(args.text), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 			}
 		}
 	},
@@ -200,7 +200,7 @@ ej.dashboard.registerWidget({
 	formatNumber: function(value){
 		if(this.model.boundColumns.yValue.length > 0){
 			var formatInfo = this.formattingInfo[this.model.boundColumns.yValue[0].uniqueColumnName];
-			return ej.DashboardUtil.formattedText(Number(value), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+			return BoldBIDashboard.DashboardUtil.formattedText(Number(value), formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		} else {
 			return value;
 		}
@@ -220,15 +220,15 @@ ej.dashboard.registerWidget({
 	
 	/*This event triggers on point click and is used for filtering*/
 	pointClick: function (args) {
-		var widgetIns = $(this.element).closest('.e-reportitem').data('widgetInstance');
+		var widgetIns = $(this.element).closest('.e-customwidget-item').data('widgetInstance');
 		if (this.model.boundColumns.yValue.length > 0 && this.model.boundColumns.xValue.length > 0 && widgetIns.designerInstance.model.mode != 'design') {
 			var selectedColumnsFilter = [];
-			var filterColumn = new ej.dashboard.selectedColumnInfo();
+			var filterColumn = new bbicustom.dashboard.selectedColumnInfo();
 			filterColumn.condition = "include";
 			filterColumn.uniqueColumnName = this.model.boundColumns.xValue[0].uniqueColumnName;
 			filterColumn.values = [args.point.x];
 			selectedColumnsFilter.push(filterColumn);
-			ej.dashboard.filterData(this, selectedColumnsFilter);
+			bbicustom.dashboard.filterData(this, selectedColumnsFilter);
 		}
 	},
 
