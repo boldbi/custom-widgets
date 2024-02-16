@@ -1,5 +1,5 @@
-/* Register the widget in dashboard.*/
-ej.dashboard.registerWidget({
+﻿/* Register the widget in dashboard.*/
+bbicustom.dashboard.registerWidget({
 
 	guid: "f38e534c-8b22-4f97-a418-065409e577c4",
 
@@ -12,15 +12,15 @@ ej.dashboard.registerWidget({
 		this.element.appendChild(this.widget);
 		this.xDataType = 'Number';
 		if (this.isWidgetConfigured()){
-			var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 			switch (widgetInstance.dataGroupInfo.FieldContainers[0].FieldInfos[0].FieldActualType) {
-				case "e-reportdesigner-dataset-number":
+				case "bbi-designer-dataset-number":
 					this.xDataType = "Number";
 					break;
-				case "e-reportdesigner-dataset-string":
+				case "bbi-designer-dataset-string":
 					this.xDataType = "String";
 					break;
-				case "e-reportdesigner-dataset-datetime":
+				case "bbi-designer-dataset-datetime":
 					this.xDataType = "DateTime";
 					break;
 				}
@@ -92,7 +92,7 @@ ej.dashboard.registerWidget({
 				}
 			});
 			this.chart.appendTo('#' + this.element.getAttribute("id") + "_widget");
-			$('#' + this.element.getAttribute("id") + "_widget").closest('.e-customwidget-element').css({'background':"transparent"});
+			$('#' + this.element.getAttribute("id") + "_widget").closest('.bbi-customwidget-element').css({'background':"transparent"});
 			$("#" +this.element.id+ "_widget_ChartBorder").attr("fill","transparent");
 		}
 		else{
@@ -119,15 +119,15 @@ ej.dashboard.registerWidget({
 	
 	/*This event triggers on point click and is used for filtering*/
 	pointClick: function (args) {
-		var widgetIns = $(this.element).closest('.e-reportitem').data('widgetInstance');
+		var widgetIns = $(this.element).closest('.e-customwidget-item').data('widgetInstance');
 		if (this.model.boundColumns.value.length > 0 && widgetIns.designerInstance.model.mode != 'design') {
 			var selectedColumnsFilter = [];
-			var filterColumn = new ej.dashboard.selectedColumnInfo();
+			var filterColumn = new bbicustom.dashboard.selectedColumnInfo();
 			filterColumn.condition = "include";
 			filterColumn.uniqueColumnName = this.model.boundColumns.value[0].uniqueColumnName;
 			filterColumn.values = [args.point.x];
 			selectedColumnsFilter.push(filterColumn);
-			ej.dashboard.filterData(this, selectedColumnsFilter);
+			bbicustom.dashboard.filterData(this, selectedColumnsFilter);
 		}
 	},
 	

@@ -1,4 +1,4 @@
-ej.dashboard.registerWidget({
+﻿bbicustom.dashboard.registerWidget({
 		
 		guid : "b0d5348d-f625-4b78-8db9-c5ed9d38eb45",
 		
@@ -14,11 +14,11 @@ ej.dashboard.registerWidget({
 			this.widget = document.createElement("div");
 			this.widget.setAttribute("id", this.element.getAttribute("id") + "_widget");
 			this.element.appendChild(this.widget);
-				this.designId = $(this.element).closest(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
-				this.designerObj = $("#" + this.designId).data("ejDashboardDesigner");
+				this.designId = $(this.element).closest(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
+				this.designerObj = $("#" + this.designId).data("BoldBIDashboardDesigner");
 				this.formattingInfo = {};
 				this.editedColumnNames = {};
-				var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+				var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 				for(var j = 0; j<widgetInstance.dataGroupInfo.FieldContainers.length; j++){
 					if(widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0 && widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0){
 						var length = widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length;
@@ -37,11 +37,11 @@ ej.dashboard.registerWidget({
 				this.resizeWidget(option.size);
 			}
 			else if (option.type == "refresh") {
-				this.designId = $(this.element).closest(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
-				this.designerObj = $("#" + this.designId).data("ejDashboardDesigner");
+				this.designId = $(this.element).closest(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
+				this.designerObj = $("#" + this.designId).data("BoldBIDashboardDesigner");
 				this.formattingInfo = {};
 				this.editedColumnNames = {};
-				var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+				var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 				for(var j = 0; j<widgetInstance.dataGroupInfo.FieldContainers.length; j++){
 					if(widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0 && widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0){
 						var length = widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length;
@@ -143,7 +143,7 @@ ej.dashboard.registerWidget({
 		},
 		/*To render the tooltip*/
 		tooltipInitialize : function(args){
-			var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 			var isTooltioCustomizationDone = false;
 			for(var i = 0; i < this.model.dataSource.length; i++){
 				for(var j = 0; j < args.model.levels.length; j++){
@@ -167,7 +167,7 @@ ej.dashboard.registerWidget({
 		/*formatTooltipNumber method is for formatting the measure values*/
 		formatTooltipNumber: function (index,number) {
 				var formatInfo = JSON.parse(JSON.stringify(this.formattingInfo[this.model.boundColumns.tooltip[index].uniqueColumnName]));
-				var number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+				var number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 			return number;
 		},
 		
@@ -175,7 +175,7 @@ ej.dashboard.registerWidget({
 		formatDataNumber: function (number) {
 				var number = Number(number);
 				var formatInfo = this.formattingInfo[this.model.boundColumns.Value[0].uniqueColumnName];
-				number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+				number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 			return number;
 		},
 		
@@ -207,7 +207,7 @@ ej.dashboard.registerWidget({
 			var selectedFilterInfos = [];
 			if (data.length > zero) {
 				for (i = 0; i < data.length; i++) {
-							var filterinfo = new ej.dashboard.selectedColumnInfo();
+							var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
 							filterinfo.condition = "include";
 							filterinfo.uniqueColumnName = Object.keys(data[i])[0];
 							filterinfo.values.push(data[i][Object.keys(data[i])[0]]);
@@ -222,10 +222,10 @@ ej.dashboard.registerWidget({
 						}
 					}
 				}
-				ej.dashboard.navigateThroughLinking(this,selectedFilterInfos,urlCaption);
+				bbicustom.dashboard.navigateThroughLinking(this,selectedFilterInfos,urlCaption);
 			}
 			else {
-				ej.dashboard.filterData(this,selectedFilterInfos);
+				bbicustom.dashboard.filterData(this,selectedFilterInfos);
 			}
 			}
 		},

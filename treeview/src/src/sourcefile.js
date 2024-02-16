@@ -1,5 +1,5 @@
-/* Register the widget in dashboard.*/
-ej.dashboard.registerWidget({
+﻿/* Register the widget in dashboard.*/
+bbicustom.dashboard.registerWidget({
 
 	guid: "a0989731-56f4-4af9-ac36-cd0b7a9edb80",
 
@@ -11,7 +11,7 @@ ej.dashboard.registerWidget({
 		var selectedValues = (SN == undefined) ? [] : SN;
 		this.expandedTreeNodes = (EN == undefined) ? [] : EN;
 		var expandedNodes = (EN == undefined) ? [] : EN;
-		var widgetIns = $(this.element).closest(".e-reportitem").data("widgetInstance");
+		var widgetIns = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 		var isExporting = !this.isNullOrUndefined(widgetIns.designer.model.dashboardFromData) && widgetIns.designer.model.dashboardFromData.loadFromData;
 		if (isExporting && this.model.dataSource.length > 0 && this.model.exportParameters != null) {
 			var isExpanded = false;
@@ -169,11 +169,11 @@ ej.dashboard.registerWidget({
 			$(args.node).addClass('e-active-check');
 		}
 		this.nodeSelected = true;
-		this.treeViweIns = $($('#' + this.element.id + 'treeview')[0]).closest('.e-reportitem').data('widgetInstance');
+		this.treeViweIns = $($('#' + this.element.id + 'treeview')[0]).closest('.e-customwidget-item').data('widgetInstance');
 		this.getExportedNodesForMultiSelect();
 		if (this.model.initMode === "runtime") {
 			var selectedFilterInfos = [];
-			var customWidgetObject = $(this.element).closest('.e-reportitem').data('widgetInstance');
+			var customWidgetObject = $(this.element).closest('.e-customwidget-item').data('widgetInstance');
 			if (this.treeObj.getAllCheckedNodes().length > 0) {
 				var checkedItems = this.treeObj.getAllCheckedNodes();
 				var treeData = this.treeObj.treeData;
@@ -200,7 +200,7 @@ ej.dashboard.registerWidget({
 							}
 						}
 						if (!itemAdded) {
-							var filterinfo = new ej.dashboard.selectedColumnInfo();
+							var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
 							filterinfo.condition = "Include";
 							filterinfo.values = [this.treeObj.treeData[i].name];
 							filterinfo.uniqueColumnName = this.treeObj.treeData[i].columnName;
@@ -214,10 +214,10 @@ ej.dashboard.registerWidget({
 			}
 			if (customWidgetObject.widgetJson.FilterSettings.ActAsMasterWidget) {
 				if (selectedFilterInfos.length > 0) {
-					ej.dashboard.filterData(this, selectedFilterInfos);
+					bbicustom.dashboard.filterData(this, selectedFilterInfos);
 				} else {
-					ej.dashboard.filterData(this, selectedFilterInfos);
-					ej.Dashboard.WidgetHelper.disableClearFilter(customWidgetObject);
+					bbicustom.dashboard.filterData(this, selectedFilterInfos);
+					BoldBIDashboard.Dashboard.WidgetHelper.disableClearFilter(customWidgetObject);
 				}
 			}
 		}	
@@ -309,12 +309,12 @@ ej.dashboard.registerWidget({
 	},
 	createStyle : function() {
             var styleTag = '<style' + ' >\n';
-            styleTag = styleTag + '.e-dashboarddesigner-bannerPanel-iconcontainer' + '\n{\n' + 'display:none' + '\n}\n';
+            styleTag = styleTag + '.bbi-dashboarddesigner-bannerPanel-iconcontainer' + '\n{\n' + 'display:none' + '\n}\n';
             styleTag = styleTag + '</style>';
             return styleTag;
         },
     update: function (option) {
-		var widgetIns = $(this.element).closest(".e-reportitem").data("widgetInstance");
+		var widgetIns = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
         var isExporting = !this.isNullOrUndefined(widgetIns.designer.model.dashboardFromData) && widgetIns.designer.model.dashboardFromData.loadFromData;
 		if(!isExporting && this.model.dataSource.length > 0){
 	        this.getExportedNodesForMultiSelect();
