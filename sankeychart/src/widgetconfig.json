@@ -1,155 +1,118 @@
-﻿{
-  "widgetName": "SankeyChart",
-  "guid": "0e38aa64-4b45-4a50-8457-cad3957adeec",
-  "displayName": "SankeyChart",
-  "category": "Miscellaneous",
-  "description": "Sample widget for getting start",
-  "srcFile": "src/sourcefile.js",
-  "version": "3.1.0.0",
-  "dependencies": {
-    "scripts": [
-      "src/sankeychart.min.js"
-    ],
-    "styles": [
-      "style/widget.css"
-    ]
-  },
-  "dataFields": [
-    {
-      "displayName": "Value",
-      "valueType": "measure",
-      "name": "value",
-      "min": "1",
-      "max": "1",
-      "optional": "false"
+{
+    "widgetName": "SankeyChart",
+    "guid": "0e38aa64-4b45-4a50-8457-cad3957adeec",
+    "displayName": "SankeyChart",
+    "category": "Miscellaneous",
+    "description": "Sample widget for getting start",
+    "srcFile": "src/sourcefile.js",
+    "version": "3.1.0.0",
+    "dependencies": {
+        "scripts": ["src/sankeychart.min.js"],
+        "styles": ["style/widget.css"]
     },
-    {
-      "displayName": "Column(s)",
-      "valueType": "dimension",
-      "name": "column",
-      "min": "1",
-      "max": "6",
-      "optional": "false"
-    },
-	{
-      "displayName": "Filter(s)",
-      "valueType": "both",
-      "name": "FilterColumn",
-      "min": "1",
-      "max": "1",
-      "optional": "false"
-    }
-  ],
-  "functionalities": [
-	{
-      "header": "Basic Settings",
-      "properties": [
-		{
-          "displayName": "Enable Animation",
-          "controlType": "bool",
-          "name": "enableAnimation",
-          "defaultValue": "false"
+    "dataFields": [{
+        "displayName": "Value",
+        "valueType": "measure",
+        "name": "value",
+        "min": "1",
+        "max": "1",
+        "optional": "false"
+    }, {
+        "displayName": "Column(s)",
+        "valueType": "dimension",
+        "name": "column",
+        "min": "1",
+        "max": "6",
+        "optional": "false"
+    }, {
+        "displayName": "Filter(s)",
+        "valueType": "both",
+        "name": "FilterColumn",
+        "min": "1",
+        "max": "1",
+        "optional": "false"
+    }],
+    "functionalities": [{
+        "header": "Basic Settings",
+        "properties": [{
+            "displayName": "Enable Animation",
+            "controlType": "bool",
+            "name": "enableAnimation",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Orientation",
+            "controlType": "enumeration",
+            "name": "orient",
+            "defaultValue": "Horizontal",
+            "listItems": ["Horizontal", "Vertical"]
+        }, {
+            "displayName": "Label Position",
+            "controlType": "enumeration",
+            "name": "labelPosition",
+            "defaultValue": "Right",
+            "listItems": ["Right", "Left", "Top", "Bottom", "Inside", "Outside"]
+        }, {
+            "displayName": "Label Font Size",
+            "controlType": "number",
+            "name": "labelFontSize",
+            "defaultValue": 10,
+            "min": 10,
+            "max": 50
+        }, {
+            "displayName": "Label Color",
+            "controlType": "color",
+            "name": "labelColor",
+            "defaultValue": "black"
+        }, {
+            "displayName": "Link Color",
+            "controlType": "enumeration",
+            "name": "linkColor",
+            "defaultValue": "Source",
+            "listItems": ["Source", "Target"]
+        }, {
+            "displayName": "Auto Align Nodes",
+            "controlType": "bool",
+            "name": "nodeAdjustment",
+            "defaultValue": true
+        }]
+    }, {
+        "header": "Color Settings",
+        "properties": [{
+            "displayName": "Color 1",
+            "controlType": "color",
+            "name": "sourceColor0",
+            "defaultValue": "#8BD3E1"
+        }, {
+            "displayName": "Color 2",
+            "controlType": "color",
+            "name": "sourceColor1",
+            "defaultValue": "#E57368"
+        }, {
+            "displayName": "Color 3",
+            "controlType": "color",
+            "name": "sourceColor2",
+            "defaultValue": "#FBCB43"
+        }, {
+            "displayName": "Color 4",
+            "controlType": "color",
+            "name": "sourceColor3",
+            "defaultValue": "#34B67A"
+        }, {
+            "displayName": "Color 5",
+            "controlType": "color",
+            "name": "sourceColor4",
+            "defaultValue": "#ABAABF"
+        }]
+    }],
+    "filterSettings": {
+        "masterFilter": {
+            "visible": true,
+            "defaultValue": true
         },
-		{
-          "displayName": "Orientation",
-          "controlType": "enumeration",
-          "name": "orient",
-          "defaultValue": "Horizontal",
-		  "listItems": [
-            "Horizontal",
-            "Vertical",
-          ]
-        },
-		{
-          "displayName": "Label Position",
-          "controlType": "enumeration",
-          "name": "labelPosition",
-          "defaultValue": "Right",
-		  "listItems": [
-            "Right",
-            "Left",
-            "Top",
-            "Bottom",
-            "Inside",
-            "Outside",
-          ]
-        },
-        {
-          "displayName": "Label Font Size",
-          "controlType": "number",
-          "name": "labelFontSize",
-          "defaultValue": 10,
-		  "min": 10,
-          "max": 50
-        },
-        {
-          "displayName": "Label Color",
-          "controlType": "color",
-          "name": "labelColor",
-          "defaultValue": "black"
-        },
-		{
-          "displayName": "Link Color",
-          "controlType": "enumeration",
-          "name": "linkColor",
-          "defaultValue": "Source",
-		  "listItems": [
-            "Source",
-            "Target",
-          ]
-        },
-		{
-          "displayName": "Auto Align Nodes",
-          "controlType": "bool",
-          "name": "nodeAdjustment",
-          "defaultValue": true
+        "ignoreMasterFilter": {
+            "visible": true,
+            "defaultValue": false
         }
-      ]
     },
-	{
-      "header": "Color Settings",
-      "properties": [
-        {
-          "displayName": "Color 1",
-          "controlType": "color",
-          "name": "sourceColor0",
-          "defaultValue": "#8BD3E1"
-        },
-        {
-          "displayName": "Color 2",
-          "controlType": "color",
-          "name": "sourceColor1",
-          "defaultValue": "#E57368"
-        },
-        {
-          "displayName": "Color 3",
-          "controlType": "color",
-          "name": "sourceColor2",
-          "defaultValue": "#FBCB43"
-        },
-        {
-          "displayName": "Color 4",
-          "controlType": "color",
-          "name": "sourceColor3",
-          "defaultValue": "#34B67A"
-        },
-        {
-          "displayName": "Color 5",
-          "controlType": "color",
-          "name": "sourceColor4",
-          "defaultValue": "#ABAABF"
-        },
-      ]
-    }
-  ],
-  "filterSettings": {
-    "masterFilter": {
-      "visible": true,
-      "defaultValue": true
-    },
-    "ignoreMasterFilter": {
-      "visible": true,
-      "defaultValue": false
-    }
-  }
+    "publishedDate": "2024-02-16T08:07:52.010Z"
 }

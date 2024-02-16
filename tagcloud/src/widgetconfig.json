@@ -1,4 +1,4 @@
-﻿{
+{
   "widgetName": "TagCloud",
   "guid": "fffbbfe5-c9fc-4951-a1d8-2a7e953781a0",
   "displayName": "TagCloud",
@@ -6,66 +6,52 @@
   "description": "Visualize the data based on size, with hyperlink support",
   "srcFile": "src/tagcloud.js",
   "dependencies": {
-    "scripts": [
-      "src/ej.tagcloud.js"
-    ],
-    "styles": [
-      "style/ej.tagcloud.css"
-    ]
+    "scripts": ["src/ej.tagcloud.js"],
+    "styles": ["style/ej.tagcloud.css"]
   },
-  "dataFields": [
-     {
-      "displayName": "Frequency",
-      "valueType": "measure",
-      "name": "Frequency",
+  "dataFields": [{
+    "displayName": "Frequency",
+    "valueType": "measure",
+    "name": "Frequency",
+    "min": "1",
+    "max": "1",
+    "optional": "false"
+  }, {
+    "displayName": "Text",
+    "valueType": "dimension",
+    "name": "Text",
+    "min": "1",
+    "max": "1",
+    "optional": "false"
+  }],
+  "functionalities": [{
+    "header": "Basic Properties",
+    "properties": [{
+      "displayName": "Background Color",
+      "controlType": "color",
+      "name": "textBackground",
+      "defaultValue": "#1F497D"
+    }, {
+      "displayName": "Text Color",
+      "controlType": "color",
+      "name": "textColor",
+      "defaultValue": "#B7DDE8"
+    }, {
+      "displayName": "Minimum Size",
+      "controlType": "number",
+      "name": "minTextSize",
+      "defaultValue": "12",
       "min": "1",
-      "max": "1",
-      "optional": "false"
-     },
-     {
-      "displayName": "Text",
-      "valueType": "dimension",
-      "name": "Text",
+      "max": "600"
+    }, {
+      "displayName": "Mamimum Size",
+      "controlType": "number",
+      "name": "maxTextSize",
+      "defaultValue": "20",
       "min": "1",
-      "max": "1",
-      "optional": "false"
-    }
-  ],
-  "functionalities": [	
-	{
-      "header": "Basic Properties",
-      "properties": [
-        {
-          "displayName": "Background Color",
-          "controlType": "color",
-          "name": "textBackground",
-          "defaultValue": "#1F497D"
-        },
-		{
-          "displayName": "Text Color",
-          "controlType": "color",
-          "name": "textColor",
-          "defaultValue": "#B7DDE8"
-        },
-        {
-          "displayName": "Minimum Size",
-          "controlType": "number",
-          "name": "minTextSize",
-          "defaultValue": "12",
-          "min": "1",
-          "max": "600"
-        },
-	    {
-          "displayName": "Mamimum Size",
-          "controlType": "number",
-          "name": "maxTextSize",
-          "defaultValue": "20",
-          "min": "1",
-          "max": "600"
-        }
-      ]
-    }
-  ],
+      "max": "600"
+    }]
+  }],
   "filterSettings": {
     "masterFilter": {
       "visible": "true",
@@ -75,5 +61,6 @@
       "visible": "true",
       "defaultValue": "false"
     }
-  }
+  },
+  "publishedDate": "2024-02-16T08:07:52.012Z"
 }

@@ -1,502 +1,379 @@
-﻿{
-  "widgetName": "3DChart",
-  "guid": "ebc96be7-9237-49db-8661-83748b9cd955",
-  "displayName": "3DChart",
-  "category": "Miscellaneous",
-  "description": "A 3D chart is a graphical representation for data visualization",
-  "srcFile": "src/sourcefile.js",
-  "version": "5.1.0.0",
-  "dependencies": {
-    "scripts": [
-      "src/ej.Chart.all.min.js"
-    ],
-    "styles": [
-      "style/widget.css"
-    ]
-  },
-  "dataFields": [
-    {
-      "displayName": "Value",
-      "valueType": "measure",
-      "name": "value",
-      "min": "1",
-      "max": "5",
-      "optional": "false"
+{
+    "widgetName": "3DChart",
+    "guid": "ebc96be7-9237-49db-8661-83748b9cd955",
+    "displayName": "3DChart",
+    "category": "Miscellaneous",
+    "description": "A 3D chart is a graphical representation for data visualization",
+    "srcFile": "src/sourcefile.js",
+    "version": "5.1.0.0",
+    "dependencies": {
+        "scripts": ["src/ej.Chart.all.min.js"],
+        "styles": ["style/widget.css"]
     },
-    {
-      "displayName": "Column",
-      "valueType": "dimension",
-      "name": "column",
-      "min": "1",
-      "max": "1",
-      "optional": "false"
+    "dataFields": [{
+        "displayName": "Value",
+        "valueType": "measure",
+        "name": "value",
+        "min": "1",
+        "max": "5",
+        "optional": "false"
+    }, {
+        "displayName": "Column",
+        "valueType": "dimension",
+        "name": "column",
+        "min": "1",
+        "max": "1",
+        "optional": "false"
+    }, {
+        "displayName": "Tooltip(s)",
+        "valueType": "measure",
+        "name": "tooltip",
+        "min": 1,
+        "max": 5,
+        "optional": true
+    }, {
+        "displayName": "Filter(s)",
+        "valueType": "dimension",
+        "name": "filter",
+        "min": 1,
+        "max": 5,
+        "optional": true
+    }],
+    "functionalities": [{
+        "header": "Basic Settings",
+        "properties": [{
+            "displayName": "Chart Type",
+            "controlType": "enumeration",
+            "name": "chartType",
+            "defaultValue": "Column",
+            "listItems": ["Column", "Bar", "StackingColumn", "StackingColumn100", "StackingBar", "StackingBar100"]
+        }, {
+            "displayName": "Enable Rotation",
+            "controlType": "bool",
+            "name": "enableRotation",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Enable Side by Side Placement",
+            "controlType": "bool",
+            "name": "sidebyside",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Show Title",
+            "controlType": "bool",
+            "name": "showTitle",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Title Text",
+            "controlType": "text",
+            "name": "titleText",
+            "defaultValue": ""
+        }, {
+            "displayName": "Title Font Size",
+            "controlType": "number",
+            "name": "titleSize",
+            "defaultValue": 16,
+            "min": 5,
+            "max": 50
+        }, {
+            "displayName": "Title Color",
+            "controlType": "color",
+            "name": "titleColor",
+            "defaultValue": "grey"
+        }, {
+            "displayName": "Show Tooltip",
+            "controlType": "bool",
+            "name": "showTooltip",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Show Data Labels",
+            "controlType": "bool",
+            "name": "showdataLabels",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Data Label Font Size",
+            "controlType": "number",
+            "name": "datalabelFontSize",
+            "defaultValue": "11",
+            "min": "10",
+            "max": "50"
+        }, {
+            "displayName": "Data Label Color",
+            "controlType": "color",
+            "name": "datalabelColor",
+            "defaultValue": "white"
+        }, {
+            "displayName": "Data Label Position",
+            "controlType": "enumeration",
+            "name": "datalabelPosition",
+            "defaultValue": "Center",
+            "listItems": ["Top", "Center", "Bottom"]
+        }, {
+            "displayName": "Data Label Angle",
+            "controlType": "enumeration",
+            "name": "datalabelAngle",
+            "defaultValue": "0°",
+            "listItems": ["-90°", "-45°", "0°", "90°", "45°"]
+        }, {
+            "displayName": "Show Legend",
+            "controlType": "bool",
+            "name": "showLegend",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Legend Position",
+            "controlType": "enumeration",
+            "name": "legendPosition",
+            "defaultValue": "Bottom",
+            "listItems": ["Top", "Bottom", "Left", "Right"]
+        }, {
+            "displayName": "Legend Shape",
+            "controlType": "enumeration",
+            "name": "legendshape",
+            "defaultValue": "Rectangle",
+            "listItems": ["Rectangle", "Circle", "Triangle", "SeriesType"]
+        }, {
+            "displayName": "Chart Depth",
+            "controlType": "number",
+            "name": "chartDepth",
+            "defaultValue": 30,
+            "min": 0,
+            "max": 200
+        }, {
+            "displayName": "Chart Wall Size",
+            "controlType": "number",
+            "name": "wallsize",
+            "defaultValue": 2,
+            "min": 0,
+            "max": 50
+        }, {
+            "displayName": "Chart Rotation",
+            "controlType": "number",
+            "name": "rotation",
+            "defaultValue": 30,
+            "min": -360,
+            "max": 360
+        }, {
+            "displayName": "Chart Tilt",
+            "controlType": "enumeration",
+            "name": "chartTilt",
+            "defaultValue": 0,
+            "listItems": [-30, -40, -50, 0, 30, 40, 50]
+        }]
+    }, {
+        "header": "Primaxy X-Axis Settings",
+        "properties": [{
+            "displayName": "Show Axis",
+            "controlType": "bool",
+            "name": "showxAxis",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Show Title",
+            "controlType": "bool",
+            "name": "xshowTitle",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Title Text",
+            "controlType": "text",
+            "name": "xtitleText",
+            "defaultValue": "x-axis"
+        }, {
+            "displayName": "Title Font Size",
+            "controlType": "number",
+            "name": "xtitleSize",
+            "defaultValue": 16,
+            "min": 5,
+            "max": 50
+        }, {
+            "displayName": "Title Color",
+            "controlType": "color",
+            "name": "xtitleColor",
+            "defaultValue": "grey"
+        }, {
+            "displayName": "Show Grid Lines",
+            "controlType": "bool",
+            "name": "xshowgridLine",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Grid Lines Color",
+            "controlType": "color",
+            "name": "xlineColor",
+            "defaultValue": "#a9a9a9"
+        }, {
+            "displayName": "Grid Lines Width",
+            "controlType": "number",
+            "name": "xlineWidth",
+            "defaultValue": 1,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Show Ticks",
+            "controlType": "bool",
+            "name": "xshowticks",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Ticks Color",
+            "controlType": "color",
+            "name": "xticksColor",
+            "defaultValue": "#a9a9a9"
+        }, {
+            "displayName": "Ticks Width",
+            "controlType": "number",
+            "name": "xticksWidth",
+            "defaultValue": 1,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Ticks Size",
+            "controlType": "number",
+            "name": "xtickSize",
+            "defaultValue": 5,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Label Intersection Action",
+            "controlType": "enumeration",
+            "name": "xlabelintersect",
+            "defaultValue": "Hide",
+            "listItems": ["Hide", "Trim", "MultipleRows", "Rotate90", "Rotate45", "Wrap", "WrapByWord"]
+        }, {
+            "displayName": "Label Font Size",
+            "controlType": "number",
+            "name": "xfontsize",
+            "defaultValue": 10,
+            "min": 5,
+            "max": 50
+        }, {
+            "displayName": "Label Color",
+            "controlType": "color",
+            "name": "xfontcolor",
+            "defaultValue": "black"
+        }]
+    }, {
+        "header": "Primaxy Y-Axis Settings",
+        "properties": [{
+            "displayName": "Show Axis",
+            "controlType": "bool",
+            "name": "showyAxis",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Show Title",
+            "controlType": "bool",
+            "name": "yshowTitle",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Title Text",
+            "controlType": "text",
+            "name": "ytitleText",
+            "defaultValue": "y-axis"
+        }, {
+            "displayName": "Title Font Size",
+            "controlType": "number",
+            "name": "ytitleSize",
+            "defaultValue": 16,
+            "min": 5,
+            "max": 50
+        }, {
+            "displayName": "Title Color",
+            "controlType": "color",
+            "name": "ytitleColor",
+            "defaultValue": "grey"
+        }, {
+            "displayName": "Show Grid Lines",
+            "controlType": "bool",
+            "name": "yshowgridLine",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Grid Lines Color",
+            "controlType": "color",
+            "name": "ylineColor",
+            "defaultValue": "#a9a9a9"
+        }, {
+            "displayName": "Grid Lines Width",
+            "controlType": "number",
+            "name": "ylineWidth",
+            "defaultValue": 1,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Show Ticks",
+            "controlType": "bool",
+            "name": "yshowticks",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Ticks Color",
+            "controlType": "color",
+            "name": "yticksColor",
+            "defaultValue": "#a9a9a9"
+        }, {
+            "displayName": "Ticks Width",
+            "controlType": "number",
+            "name": "yticksWidth",
+            "defaultValue": 1,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Ticks Size",
+            "controlType": "number",
+            "name": "ytickSize",
+            "defaultValue": 5,
+            "min": 1,
+            "max": 10
+        }, {
+            "displayName": "Label Intersection Action",
+            "controlType": "enumeration",
+            "name": "ylabelintersect",
+            "defaultValue": "Hide",
+            "listItems": ["Hide", "Trim", "MultipleRows", "Rotate90", "Rotate45", "Wrap", "WrapByWord"]
+        }, {
+            "displayName": "Label Font Size",
+            "controlType": "number",
+            "name": "yfontsize",
+            "defaultValue": 10,
+            "min": 5,
+            "max": 50
+        }, {
+            "displayName": "Label Color",
+            "controlType": "color",
+            "name": "yfontcolor",
+            "defaultValue": "black"
+        }]
+    }, {
+        "header": "Color Customization",
+        "properties": [{
+            "displayName": "Chart Color 1",
+            "controlType": "color",
+            "name": "chartcolor0",
+            "defaultValue": "#826AF9"
+        }, {
+            "displayName": "Chart Color 2",
+            "controlType": "color",
+            "name": "chartcolor1",
+            "defaultValue": "#2CD9C5"
+        }, {
+            "displayName": "Chart Color 3",
+            "controlType": "color",
+            "name": "chartcolor2",
+            "defaultValue": "#FFE700"
+        }, {
+            "displayName": "Chart Color 4",
+            "controlType": "color",
+            "name": "chartcolor3",
+            "defaultValue": "#2D99FF"
+        }, {
+            "displayName": "Chart Color 5",
+            "controlType": "color",
+            "name": "chartcolor4",
+            "defaultValue": "#ff754c"
+        }]
+    }],
+    "filterSettings": {
+        "masterFilter": {
+            "visible": "true",
+            "defaultValue": "true"
+        },
+        "ignoreMasterFilter": {
+            "visible": "true",
+            "defaultValue": "false"
+        }
     },
-	{ 
-		"displayName": "Tooltip(s)", 
-		"valueType": "measure", 
-		"name": "tooltip", 
-		"min": 1, 
-		"max": 5, 
-		"optional": true 
-	},
-	{ 
-		"displayName": "Filter(s)", 
-		"valueType": "dimension", 
-		"name": "filter", 
-		"min": 1, 
-		"max": 5, 
-		"optional": true 
-	}	
-  ],
-  "functionalities": [
-	{
-      "header": "Basic Settings",
-      "properties": [
-		{
-          "displayName": "Chart Type",
-          "controlType": "enumeration",
-          "name": "chartType",
-          "defaultValue": "Column",
-		  "listItems": [
-			"Column",
-			"Bar",
-			"StackingColumn",
-			"StackingColumn100",
-			"StackingBar",
-			"StackingBar100"
-          ]
-        },
-		{
-          "displayName": "Enable Rotation",
-          "controlType": "bool",
-          "name": "enableRotation",
-          "defaultValue": "true"
-        },
-		{
-          "displayName": "Enable Side by Side Placement",
-          "controlType": "bool",
-          "name": "sidebyside",
-          "defaultValue": "true"
-        },
-		{
-          "displayName": "Show Title",
-          "controlType": "bool",
-          "name": "showTitle",
-          "defaultValue": "false"
-        },
-		{
-          "displayName": "Title Text",
-          "controlType": "text",
-          "name": "titleText",
-          "defaultValue": ""
-        },
-		{
-          "displayName": "Title Font Size",
-          "controlType": "number",
-          "name": "titleSize",
-          "defaultValue": 16,
-		  "min": 5, 
-		  "max": 50, 
-        },
-		{
-          "displayName": "Title Color",
-          "controlType": "color",
-          "name": "titleColor",
-          "defaultValue": "grey"
-        },
-		{
-          "displayName": "Show Tooltip",
-          "controlType": "bool",
-          "name": "showTooltip",
-          "defaultValue": "true"
-        },
-		{
-          "displayName": "Show Data Labels",
-          "controlType": "bool",
-          "name": "showdataLabels",
-          "defaultValue": "false"
-        },
-		{
-          "displayName": "Data Label Font Size",
-          "controlType": "number",
-          "name": "datalabelFontSize",
-          "defaultValue": "11",
-          "min": "10",
-          "max": "50"
-        },
-		{
-          "displayName": "Data Label Color",
-          "controlType": "color",
-          "name": "datalabelColor",
-          "defaultValue": "white"
-        },
-		{
-          "displayName": "Data Label Position",
-          "controlType": "enumeration",
-          "name": "datalabelPosition",
-          "defaultValue": "Center",
-		  "listItems": [
-            "Top",
-			"Center",
-			"Bottom"
-          ]
-        },
-		{
-          "displayName": "Data Label Angle",
-          "controlType": "enumeration",
-          "name": "datalabelAngle",
-          "defaultValue": "0°",
-		  "listItems": [
-            "-90°",
-			"-45°",
-			"0°",
-			"90°",
-			"45°",
-          ]
-        },
-        {
-          "displayName": "Show Legend",
-          "controlType": "bool",
-          "name": "showLegend",
-          "defaultValue": "false"
-        },
-		{
-          "displayName": "Legend Position",
-          "controlType": "enumeration",
-          "name": "legendPosition",
-          "defaultValue": "Bottom",
-		  "listItems": [
-            "Top",
-            "Bottom",
-			"Left",
-			"Right"
-          ]
-        },
-		{
-          "displayName": "Legend Shape",
-          "controlType": "enumeration",
-          "name": "legendshape",
-          "defaultValue":  "Rectangle",
-		  "listItems": [
-            "Rectangle",
-			"Circle",
-			"Triangle",
-            "SeriesType",
-          ]
-        },
-		{
-          "displayName": "Chart Depth",
-          "controlType": "number",
-          "name": "chartDepth",
-          "defaultValue": 30,
-          "min": 0,
-          "max": 200
-        },
-		{
-          "displayName": "Chart Wall Size",
-          "controlType": "number",
-          "name": "wallsize",
-          "defaultValue": 2,
-          "min": 0,
-          "max": 50
-        },
-		{
-          "displayName": "Chart Rotation",
-          "controlType": "number",
-          "name": "rotation",
-          "defaultValue": 30,
-          "min": -360,
-          "max": 360
-        },
-		{
-          "displayName": "Chart Tilt",
-          "controlType": "enumeration",
-          "name": "chartTilt",
-          "defaultValue": 0,
-		  "listItems": [
-            -30,
-			-40,
-			-50,
-            0,
-			30,
-			40,
-			50,
-          ]
-        },
-      ]
-    },
-		{
-	  "header": "Primaxy X-Axis Settings",
-      "properties": [
-		{
-		"displayName": "Show Axis",
-		"controlType": "bool",
-        "name": "showxAxis",
-        "defaultValue": "false"
-		},
-		{
-		"displayName": "Show Title",
-		"controlType": "bool",
-        "name": "xshowTitle",
-        "defaultValue": "false"
-		},
-		{
-		"displayName": "Title Text",
-		"controlType": "text",
-		"name": "xtitleText",
-		"defaultValue": "x-axis"
-		},
-		{
-          "displayName": "Title Font Size",
-          "controlType": "number",
-          "name": "xtitleSize",
-          "defaultValue": 16,
-		  "min": 5, 
-		  "max": 50, 
-        },
-		{
-          "displayName": "Title Color",
-          "controlType": "color",
-          "name": "xtitleColor",
-          "defaultValue": "grey"
-        },
-		{
-		"displayName": "Show Grid Lines",
-		"controlType": "bool",
-		"name": "xshowgridLine",
-		"defaultValue": "true"
-		},
-		{
-		"displayName": "Grid Lines Color",
-		"controlType": "color",
-		"name": "xlineColor",
-		"defaultValue": "#a9a9a9"
-		},
-		{
-		"displayName": "Grid Lines Width",
-		"controlType": "number",
-		"name": "xlineWidth",
-		"defaultValue": 1,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-		"displayName": "Show Ticks",
-		"controlType": "bool",
-		"name": "xshowticks",
-		"defaultValue": "true"
-		},
-		{
-		"displayName": "Ticks Color",
-		"controlType": "color",
-		"name": "xticksColor",
-		"defaultValue": "#a9a9a9"
-		},
-		{
-		"displayName": "Ticks Width",
-		"controlType": "number",
-		"name": "xticksWidth",
-		"defaultValue": 1,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-		"displayName": "Ticks Size",
-		"controlType": "number",
-		"name": "xtickSize",
-		"defaultValue": 5,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-          "displayName": "Label Intersection Action",
-          "controlType": "enumeration",
-          "name": "xlabelintersect",
-          "defaultValue": "Hide",
-		  "listItems": [
-            "Hide",
-			"Trim",
-			"MultipleRows",
-			"Rotate90",
-			"Rotate45",
-			"Wrap",
-			"WrapByWord"
-          ]
-        },
-		{
-          "displayName": "Label Font Size",
-          "controlType": "number",
-          "name": "xfontsize",
-          "defaultValue": 10,
-		  "min": 5, 
-		  "max": 50, 
-        },
-		{
-          "displayName": "Label Color",
-          "controlType": "color",
-          "name": "xfontcolor",
-          "defaultValue": "black"
-        },
-	   ]
-	},
-		{
-	  "header": "Primaxy Y-Axis Settings",
-      "properties": [
-		{
-		"displayName": "Show Axis",
-		"controlType": "bool",
-        "name": "showyAxis",
-        "defaultValue": "false"
-		},
-		{
-		"displayName": "Show Title",
-		"controlType": "bool",
-        "name": "yshowTitle",
-        "defaultValue": "false"
-		},
-		{
-		"displayName": "Title Text",
-		"controlType": "text",
-		"name": "ytitleText",
-		"defaultValue": "y-axis"
-		},
-		{
-          "displayName": "Title Font Size",
-          "controlType": "number",
-          "name": "ytitleSize",
-          "defaultValue": 16,
-		  "min": 5, 
-		  "max": 50, 
-        },
-		{
-          "displayName": "Title Color",
-          "controlType": "color",
-          "name": "ytitleColor",
-          "defaultValue": "grey"
-        },
-		{
-		"displayName": "Show Grid Lines",
-		"controlType": "bool",
-		"name": "yshowgridLine",
-		"defaultValue": "true"
-		},
-		{
-		"displayName": "Grid Lines Color",
-		"controlType": "color",
-		"name": "ylineColor",
-		"defaultValue": "#a9a9a9"
-		},
-		{
-		"displayName": "Grid Lines Width",
-		"controlType": "number",
-		"name": "ylineWidth",
-		"defaultValue": 1,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-		"displayName": "Show Ticks",
-		"controlType": "bool",
-		"name": "yshowticks",
-		"defaultValue": "true"
-		},
-		{
-		"displayName": "Ticks Color",
-		"controlType": "color",
-		"name": "yticksColor",
-		"defaultValue": "#a9a9a9"
-		},
-		{
-		"displayName": "Ticks Width",
-		"controlType": "number",
-		"name": "yticksWidth",
-		"defaultValue": 1,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-		"displayName": "Ticks Size",
-		"controlType": "number",
-		"name": "ytickSize",
-		"defaultValue": 5,
-		"min": 1, 
-		"max": 10, 
-		},
-		{
-          "displayName": "Label Intersection Action",
-          "controlType": "enumeration",
-          "name": "ylabelintersect",
-          "defaultValue": "Hide",
-		  "listItems": [
-            "Hide",
-			"Trim",
-			"MultipleRows",
-			"Rotate90",
-			"Rotate45",
-			"Wrap",
-			"WrapByWord"
-          ]
-        },
-		{
-          "displayName": "Label Font Size",
-          "controlType": "number",
-          "name": "yfontsize",
-          "defaultValue": 10,
-		  "min": 5, 
-		  "max": 50, 
-        },
-		{
-          "displayName": "Label Color",
-          "controlType": "color",
-          "name": "yfontcolor",
-          "defaultValue": "black"
-        },
-	   ]
-	},
-	{
-	  "header": "Color Customization",
-      "properties": [
-		{
-		"displayName": "Chart Color 1",
-		"controlType": "color",
-		"name": "chartcolor0",
-		"defaultValue": "#826AF9"
-		},
-		{
-		"displayName": "Chart Color 2",
-		"controlType": "color",
-		"name": "chartcolor1",
-		"defaultValue": "#2CD9C5"
-		},
-		{
-		"displayName": "Chart Color 3",
-		"controlType": "color",
-		"name": "chartcolor2",
-		"defaultValue": "#FFE700"
-		},
-		{
-		"displayName": "Chart Color 4",
-		"controlType": "color",
-		"name": "chartcolor3",
-		"defaultValue": "#2D99FF"
-		},
-		{
-		"displayName": "Chart Color 5",
-		"controlType": "color",
-		"name": "chartcolor4",
-		"defaultValue": "#ff754c"
-		},
-	   ]
-	}
-  ],
-  "filterSettings": {
-    "masterFilter": {
-      "visible": "true",
-      "defaultValue": "true"
-    },
-    "ignoreMasterFilter": {
-      "visible": "true",
-      "defaultValue": "false"
-    }
-  }
+    "publishedDate": "2024-02-16T08:07:52.001Z"
 }
