@@ -1,5 +1,5 @@
-/* Register the widget in dashboard.*/
-ej.dashboard.registerWidget({
+﻿/* Register the widget in dashboard.*/
+bbicustom.dashboard.registerWidget({
 
     guid:"4b77ebe6-c9bd-48be-a8ab-a525554c6b77",
 
@@ -10,10 +10,10 @@ ej.dashboard.registerWidget({
         this.widget.setAttribute("id", this.element.id+"_widget");
 		$(this.widget).css({"width":this.element.clientWidth,"height":this.element.clientHeight});
         this.element.appendChild(this.widget);
-		this.designId = $(this.element).closest(".e-reportitem").attr("id").split("_" + this.model.widgetId)[0];
-		this.designerObj = $("#" + this.designId).data("ejDashboardDesigner");
+		this.designId = $(this.element).closest(".e-customwidget-item").attr("id").split("_" + this.model.widgetId)[0];
+		this.designerObj = $("#" + this.designId).data("BoldBIDashboardDesigner");
 		this.formattingInfo = {};
-		var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+		var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 				for(var j = 0; j<widgetInstance.dataGroupInfo.FieldContainers.length; j++){
 					if(widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0 && widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length > 0){
 						var length = widgetInstance.dataGroupInfo.FieldContainers[j].FieldInfos.length;
@@ -85,7 +85,7 @@ ej.dashboard.registerWidget({
 	},
 	tooltipInitialize : function(args){
 		if(this.isWidgetConfigured()){
-			var widgetInstance = $(this.element).closest(".e-reportitem").data("widgetInstance");
+			var widgetInstance = $(this.element).closest(".e-customwidget-item").data("widgetInstance");
 			var isTooltioCustomizationDone = false;
 			
 			var valUCN = this.model.boundColumns.value[0].uniqueColumnName;
@@ -136,25 +136,25 @@ ej.dashboard.registerWidget({
 	formatDataNumber: function (number) {
 		var number = Number(number);
 		var formatInfo = this.formattingInfo[this.model.boundColumns.value[0].uniqueColumnName];
-		number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+		number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		return number;
 	},
 	
 	formatTooltipNumber: function (index,number) {
 		var formatInfo = JSON.parse(JSON.stringify(this.formattingInfo[this.model.boundColumns.tooltip[index].uniqueColumnName]));
-		var number = ej.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
+		var number = BoldBIDashboard.DashboardUtil.formattedText(number, formatInfo.Culture, formatInfo.DecimalPoints, formatInfo.FormatType, formatInfo.DecimalSeparator, formatInfo.GroupSeparator, formatInfo.Prefix, formatInfo.Suffix, formatInfo.Unit, true, this.designerObj);
 		return number;
 	},
 	
 	onClick: function(args){
 		if(this.isWidgetConfigured()){
 			var selectedFilterInfos = [];
-			var filterinfo = new ej.dashboard.selectedColumnInfo();
+			var filterinfo = new bbicustom.dashboard.selectedColumnInfo();
 				filterinfo.condition = "include";
 				filterinfo.uniqueColumnName = this.model.boundColumns.column[0].uniqueColumnName;
 				filterinfo.values.push(args.model.series[0].points[args.data.pointData.pointIndex].x);
 			selectedFilterInfos.push(filterinfo);
-			ej.dashboard.filterData(this,selectedFilterInfos);
+			bbicustom.dashboard.filterData(this,selectedFilterInfos);
 		}
 	},
 	

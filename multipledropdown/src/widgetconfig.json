@@ -1,4 +1,4 @@
-﻿{
+{
   "widgetName": "MultiComboBoxPopup",
   "guid": "ec64d658-f6c6-43e7-b11d-95eb2f4c68ab",
   "displayName": "MultiComboBoxPopup",
@@ -7,50 +7,38 @@
   "srcFile": "src/sourcefile.js",
   "version": "3.1.0.0",
   "dependencies": {
-    "scripts": [
-      "src/ej2CustomMultiComboBox.min.js"
-    ],
-    "styles": [
-      "style/widget.css"
-    ]
+    "scripts": ["src/ej2CustomMultiComboBox.min.js"],
+    "styles": ["style/widget.css"]
   },
-  "dataFields": [
-   {
-      "displayName": "Column (s)",
-      "valueType": "dimension",
-      "name": "column",
-      "min": "1",
-      "max": "20",
-      "optional": "false"
-    }
-  ],
-  "functionalities": [
-     {
-      "header": "Basic Settings",
-      "properties": [
-        {
-          "displayName": "Enable Multiselect",
-          "controlType": "bool",
-          "name": "enablemultiselect",
-          "defaultValue": "true"
-        },
-        {
-          "displayName": "Allow Filter",
-          "controlType": "bool",
-          "name": "allowfilter",
-          "defaultValue": "true"
-        },
-		{
-          "displayName": "Popup Height",
-          "controlType": "number",
-          "name": "pHeight",
-          "defaultValue": 250,
-          "min": 10,
-          "max": 1000
-        }
-      ]
-    }
-  ],
+  "dataFields": [{
+    "displayName": "Column (s)",
+    "valueType": "dimension",
+    "name": "column",
+    "min": "1",
+    "max": "20",
+    "optional": "false"
+  }],
+  "functionalities": [{
+    "header": "Basic Settings",
+    "properties": [{
+      "displayName": "Enable Multiselect",
+      "controlType": "bool",
+      "name": "enablemultiselect",
+      "defaultValue": "true"
+    }, {
+      "displayName": "Allow Filter",
+      "controlType": "bool",
+      "name": "allowfilter",
+      "defaultValue": "true"
+    }, {
+      "displayName": "Popup Height",
+      "controlType": "number",
+      "name": "pHeight",
+      "defaultValue": 250,
+      "min": 10,
+      "max": 1000
+    }]
+  }],
   "filterSettings": {
     "masterFilter": {
       "visible": "true",
@@ -60,5 +48,6 @@
       "visible": "true",
       "defaultValue": "false"
     }
-  }
+  },
+  "publishedDate": "2024-02-16T08:07:52.010Z"
 }

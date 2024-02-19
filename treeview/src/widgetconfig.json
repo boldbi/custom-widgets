@@ -1,71 +1,58 @@
-﻿{
-  "widgetName": "TreeView",
-  "guid": "a0989731-56f4-4af9-ac36-cd0b7a9edb80",
-  "displayName": "TreeView",
-  "category": "Miscellaneous",
-  "description": "The Treeview is used to represent the hierarchical data in a tabular format",
-  "srcFile": "src/sourcefile.js",
-  "version": "4.2.0.0",
-  "dependencies": {
-    "scripts": [
-      "src/ej2.treeview.min.js"
-    ],
-    "styles": [
-      "style/material.css",
-      "style/widget.css"
-    ]
-  },
-  "dataFields": [
-    {
-      "displayName": "Column(s)",
-      "valueType": "dimension",
-      "name": "pcolumn",
-      "min": "1",
-      "max": "6",
-      "optional": "false"
+{
+    "widgetName": "TreeView",
+    "guid": "a0989731-56f4-4af9-ac36-cd0b7a9edb80",
+    "displayName": "TreeView",
+    "category": "Miscellaneous",
+    "description": "The Treeview is used to represent the hierarchical data in a tabular format",
+    "srcFile": "src/sourcefile.js",
+    "version": "4.2.0.0",
+    "dependencies": {
+        "scripts": ["src/ej2.treeview.min.js"],
+        "styles": ["style/material.css", "style/widget.css"]
     },
-	{
-      "displayName": "Filter",
-      "valueType": "both",
-      "name": "FilterColumn",
-      "min": "1",
-      "max": "10",
-      "optional": "true"
-    }
-  ],
-  "functionalities": [
-    {
-      "header": "Basic Settings",
-      "properties": [
-        {
-          "displayName": "Enable Multi Select",
-          "controlType": "bool",
-          "name": "multiSelect",
-          "defaultValue": "true"
+    "dataFields": [{
+        "displayName": "Column(s)",
+        "valueType": "dimension",
+        "name": "pcolumn",
+        "min": "1",
+        "max": "6",
+        "optional": "false"
+    }, {
+        "displayName": "Filter",
+        "valueType": "both",
+        "name": "FilterColumn",
+        "min": "1",
+        "max": "10",
+        "optional": "true"
+    }],
+    "functionalities": [{
+        "header": "Basic Settings",
+        "properties": [{
+            "displayName": "Enable Multi Select",
+            "controlType": "bool",
+            "name": "multiSelect",
+            "defaultValue": "true"
+        }, {
+            "displayName": "Expand All",
+            "controlType": "bool",
+            "name": "expand",
+            "defaultValue": "false"
+        }, {
+            "displayName": "Selected Item Text Color",
+            "controlType": "color",
+            "name": "selectedTextColor",
+            "defaultValue": "#e3165b"
+        }]
+    }],
+    "filterSettings": {
+        "masterFilter": {
+            "visible": "true",
+            "defaultValue": "false"
         },
-        {
-          "displayName": "Expand All",
-          "controlType": "bool",
-          "name": "expand",
-          "defaultValue": "false"
-        },
-        {
-          "displayName": "Selected Item Text Color",
-          "controlType": "color",
-          "name": "selectedTextColor",
-          "defaultValue": "#e3165b"
+        "ignoreMasterFilter": {
+            "visible": "true",
+            "defaultValue": "false"
         }
-      ]
     },
-  ],
-  "filterSettings": {
-    "masterFilter": {
-      "visible": "true",
-      "defaultValue": "false"
-    },
-    "ignoreMasterFilter": {
-      "visible": "true",
-      "defaultValue": "false"
-    }
-  }
+    "publishedDate": "2024-02-16T08:07:52.013Z"
 }

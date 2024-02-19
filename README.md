@@ -45,3 +45,7 @@ npm run pack -- --widgetname=sunburst
 3.  [Defining the Properties](assets/PropertyPanel.md)
 4.  [Filter Interaction](assets/FilterInteraction.md)
 5.  [Defining Filters Section](assets/FiltersSection.md)
+6.  [Formatting Number Values](assets/Formatting.md)
+7.  [Getting Color Codes](assets/ColumnColor.md)
+8.  [Theming Support](assets/ThemeSupport.md)
+9.  [Virtual Data fetching support](assets/VirtualDataFetching.md)

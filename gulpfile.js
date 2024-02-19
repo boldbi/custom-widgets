@@ -8,28 +8,49 @@ import { v4 as uuidv4 } from 'uuid';
 import jsonEditor from 'gulp-json-editor';
 
 gulp.task('pack-all-customwidgets', (done) => {
-	const currentDir = process.cwd();
-	const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
-		.filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'templatefiles' && entry.name != 'assets')
-		.map(entry => ({
-			path: path.join(currentDir, entry.name),
-			name: entry.name
-		}));
+    const currentDir = process.cwd();
+    const subdirectories = fs.readdirSync(currentDir, { withFileTypes: true })
+        .filter(entry => entry.isDirectory() && entry.name != '.git' && entry.name != 'node_modules' && entry.name != 'dist' && entry.name != 'templatefiles' && entry.name != 'assets')
+        .map(entry => ({
+            path: path.join(currentDir, entry.name),
+            name: entry.name
+        }));
 
-	subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
-		const directoryToCheck = path.join(subdirectoryPath, 'src');
+    subdirectories.forEach(({ path: subdirectoryPath, name: subdirectoryName }) => {
+        const directoryToCheck = path.join(subdirectoryPath, 'src');
 
-		fs.stat(directoryToCheck, (err, stat) => {
-			if (!err && stat.isDirectory()) {
-				gulp.src([`${directoryToCheck}/icon/**/*`,`${directoryToCheck}/src/**/*`,`${directoryToCheck}/style/**/*`,`${directoryToCheck}/widgetconfig.json`], { base: directoryToCheck })
-					.pipe(zip(`${subdirectoryName}.bicw`))
-					.pipe(gulp.dest('dist'));
-			} else {
-				console.log('Directory does not exist:', directoryToCheck);
-			}
-		});
-	});
-	done();
+        // Get the current datetime
+        const currentDatetime = new Date().toISOString();
+        
+        // Define key-value pairs to add to widgetconfig.json
+        const keyValuePairs = {
+            publishedDate: currentDatetime // Add your additional attribute here
+        };
+
+        // Update widgetconfig.json with additional attribute(s)
+        gulp.src(`${directoryToCheck}/widgetconfig.json`)
+            .pipe(jsonEditor(keyValuePairs))
+            .pipe(gulp.dest(directoryToCheck))
+            .on('end', function () {
+                // After updating widgetconfig.json, proceed with packing
+                fs.stat(directoryToCheck, (err, stat) => {
+                    if (!err && stat.isDirectory()) {
+                        gulp.src([
+                            `${directoryToCheck}/icon/**/*`,
+                            `${directoryToCheck}/src/**/*`,
+                            `${directoryToCheck}/style/**/*`,
+                            `${directoryToCheck}/widgetconfig.json`
+                        ], { base: directoryToCheck })
+                            .pipe(zip(`${subdirectoryName}.bicw`))
+                            .pipe(gulp.dest('dist'));
+                    } else {
+                        console.log('Directory does not exist:', directoryToCheck);
+                    }
+                });
+            });
+    });
+
+    done();
 });
 
 gulp.task('pack-customwidget', (done) => {
