@@ -27,6 +27,7 @@ steps:
       echo 'distributionID: $(distributionID)'
   displayName: Create and Packall
 - bash: ls -R $(System.DefaultWorkingDirectory)
+
 # - task: S3Upload@1
 #   # condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
 #   inputs:
