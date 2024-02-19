@@ -3,10 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
- branches:
+trigger: 
+  branches:
    include:
      - main
+ 
 pr: none
 
 pool:
@@ -26,15 +27,22 @@ steps:
       npm run packall
   displayName: Create and Packall
 - bash: ls -R $(System.DefaultWorkingDirectory)
+
 - task: S3Upload@1
   condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
   inputs:
     awsCredentials: 'Aws access'
     regionName: 'us-east-2'
     bucketName: $(s3-bucket-name)
-    sourceFolder: '$(System.DefaultWorkingDirectory)/dist'
-    targetFolder: wp/custom-widgets/
-- task: PublishBuildArtifacts@1
+    sourceFolder: $(sourceFolder)
+    filesAcl: 'public-read'
+    targetFolder: $(targetFolder)
+
+- task: AWSCLI@1
+  displayName: 'Invalidate CloudFront Cache'
   inputs:
-    pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
-    artifactName: 'distFiles'
+    awsCredentials: 'Aws access'
+    regionName: 'us-east-2'
+    awsCommand: 'cloudfront'
+    awsSubCommand: 'create-invalidation'
+    awsArguments: '--distribution-id $(distributionID) --paths $(CacheclearPath)'
