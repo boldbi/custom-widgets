@@ -3,12 +3,13 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: none
- 
-pr: 
+trigger: 
   branches:
    include:
      - main
+ 
+pr: none
+
 pool:
   vmImage: ubuntu-latest
 
@@ -24,26 +25,24 @@ steps:
 - script: |
       npm run create -- --widgetname=testwidget
       npm run packall
-      echo 'distributionID: $(distributionID)'
   displayName: Create and Packall
 - bash: ls -R $(System.DefaultWorkingDirectory)
 
-# - task: S3Upload@1
-#   # condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
-#   inputs:
-#     awsCredentials: 'Aws access'
-#     regionName: 'us-east-2'
-#     bucketName: $(s3-bucket-name)
-#     sourceFolder: $(sourceFolder)
-#     filesAcl: 'public-read'
-#     targetFolder: $(targetFolder)
+- task: S3Upload@1
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
+  inputs:
+    awsCredentials: 'Aws access'
+    regionName: 'us-east-2'
+    bucketName: $(s3-bucket-name)
+    sourceFolder: $(sourceFolder)
+    filesAcl: 'public-read'
+    targetFolder: $(targetFolder)
 
-# - task: AWSCLI@1
-#   displayName: 'Invalidate CloudFront Cache'
-#   inputs:
-#     awsCredentials: 'Aws access'
-#     regionName: 'us-east-2'
-#     # bucketName: $(s3-bucket-name)
-#     awsCommand: 'cloudfront'
-#     awsSubCommand: 'create-invalidation'
-#     awsArguments: '--distribution-id $(distributionID) --paths /wp/custom-widgets/*'
+- task: AWSCLI@1
+  displayName: 'Invalidate CloudFront Cache'
+  inputs:
+    awsCredentials: 'Aws access'
+    regionName: 'us-east-2'
+    awsCommand: 'cloudfront'
+    awsSubCommand: 'create-invalidation'
+    awsArguments: '--distribution-id $(distributionID) --paths $(CacheclearPath)'
