@@ -41,5 +41,7 @@ steps:
   inputs:
     awsCredentials: 'Aws access'
     regionName: 'us-east-2'
-    awsCommand: 'cloudfront create-invalidation'
+    # bucketName: $(s3-bucket-name)
+    awsCommand: 'cloudfront'
+    awsSubCommand: 'create-invalidation'
     awsArguments: '--distribution-id $(distributionID) --paths /wp/custom-widgets/*'
