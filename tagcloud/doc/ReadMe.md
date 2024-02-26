@@ -1,6 +1,6 @@
 **TagCloud**
 
-Empower decision-making through Tag Cloud visualizations. Track trends, assess performance, and optimize strategies for enhanced outcomes.
+A tag cloud, is a visual representation of text data, typically used to depict keyword metadata (tags) or to visualize free form text. Tags are usually single words and the importance of each tag is shown with font size. This format is often used to quickly visualize the frequency of words within a body of text, where more frequently used words are displayed with larger font sizes.
 
 ![TagCloud](Images/SampleImage.png)
 
@@ -12,11 +12,11 @@ We have the ability to associate the data with the widget, as shown in the image
 
 **Frequency**
 
-We have the option to input numerical values into this section.
+Numerical values can be input into this section to show the frequency of each word based on how often it is repeated.
 
 **Text**
 
-We have the option to input string values into this section.
+We are able to input string values into this section, which includes frequently used keywords.
 
 **Properties**
 
@@ -33,23 +33,3 @@ The Properties section allows for customization of the TagCloud visualization to
 **Minimum Size** property allows us to establish the smallest font size that can be used in the TagCloud.
 
 ![Basic Properties](Images/BasicProperties.png)
-
-**Use Cases**
-
-**1. Targeted Marketing Campaign**
-
-Visualize your campaign strategies by combining your marketing data with Tag Cloud widget, track targeted marketing campaigns and make informed marketing decisions.
-
-![Basic Properties](Images/TargetedMarketingCampaign.png)
-
-**2. Visualize Best Rated Programming Languages**
-
-Analyse developer’s data and track best rated performing programming languages using Tag Cloud Chart, track popularity of modern technologies and make prompt informed decisions. 
-
-![Basic Properties](Images/VisualizeBestRatedProgrammingLanguages.png)
-
-**3. Track Trending Topics in Academic**
-
-Track the performance of various topics in different subjects using Tag Cloud widget and ensure effective teaching and delivery method.  
-
-![Basic Properties](Images/TrendingTopicsinAcademic.png)
