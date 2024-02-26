@@ -1,6 +1,6 @@
 **MultipleDropDown**
 
-MultipleDropDown custom widget is used to visualize the data as in the below image.
+The Multiple dropdown widget enables users to choose multiple options from a dropdown menu popup, offering a user-friendly solution for making selections from a list of choices without occupying excessive screen space.
 
 ![MultipleDropDown](Images/SampleImage.png)
 
@@ -12,11 +12,11 @@ You can bound the data to this widget as in the below image.
 
 **Column(s)**
 
-You can add the string or date values to this section.
+We have the option to include additional string columns in this section. For each string column added, a separate combo box will be generated.
 
 **Properties**
 
-This Properties section helps us to customize the MultipleDropDown widget as per our need. We have the following properties to customize the MultipleDropDown widget.
+Properties section allows for customization of the MultipleDropDown widget according to our requirements. The widget can be customized using the properties listed below.
 
 **Basic Settings**
 
