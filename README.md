@@ -1,4 +1,4 @@
-# Bold BI Custom Widget Samples 
+# Bold BI Custom Widget Samples
 
 Welcome to the Bold BI Custom Widgets Repository!
 
@@ -15,7 +15,7 @@ To use the sample custom widgets, clone this GitHub repository using Git.
     cd custom-widgets
 ```
 
-* Install required packages by below command. 
+* Install required packages by below command.
 
 ```csharp
 npm install
@@ -40,12 +40,13 @@ npm run pack -- --widgetname=sunburst
 ```
 
 ## Building the custom widget
-1.  [Building a custom widget with Static Data](assets/DefaultData.md)
-2.  [Defining the Data Binding](assets/DataBinding.md)
-3.  [Defining the Properties](assets/PropertyPanel.md)
-4.  [Filter Interaction](assets/FilterInteraction.md)
-5.  [Defining Filters Section](assets/FiltersSection.md)
-6.  [Formatting Number Values](assets/Formatting.md)
-7.  [Getting Color Codes](assets/ColumnColor.md)
-8.  [Theming Support](assets/ThemeSupport.md)
-9.  [Virtual Data fetching support](assets/VirtualDataFetching.md)
+
+1. [Building a custom widget with Static Data](assets/DefaultData.md)
+2. [Defining the Data Binding](assets/DataBinding.md)
+3. [Defining the Properties](assets/PropertyPanel.md)
+4. [Filter Interaction](assets/FilterInteraction.md)
+5. [Defining Filters Section](assets/FiltersSection.md)
+6. [Formatting Number Values](assets/Formatting.md)
+7. [Getting Color Codes](assets/ColumnColor.md)
+8. [Theming Support](assets/ThemeSupport.md)
+9. [Virtual Data fetching support](assets/VirtualDataFetching.md)
