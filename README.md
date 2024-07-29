@@ -43,7 +43,6 @@ npm run pack -- --widgetname=sunburst
 1.  [Building a custom widget with Static Data](assets/DefaultData.md)
 2.  [Defining the Data Binding](assets/DataBinding.md)
 3.  [Defining the Properties](assets/PropertyPanel.md)
-
 5.  [Filter Interaction](assets/FilterInteraction.md)
 6.  [Defining Filters Section](assets/FiltersSection.md)
 7.  [Formatting Number Values](assets/Formatting.md)
