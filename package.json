@@ -2,7 +2,7 @@
 	"type": "module",
 	"devDependencies": {
 		"fs": "^0.0.1-security",
-		"gulp": "^4.0.2",
+		"gulp": "^5.0.0",
 		"gulp-json-editor": "^2.5.7",
 		"gulp-path": "^4.0.0",
 		"gulp-rename": "^2.0.0",
